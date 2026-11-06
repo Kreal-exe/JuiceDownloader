@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             x:Class="JuiceDownloader.Views.LyricsSheet">
+    <Grid Background="{DynamicResource Brush.Overlay}">
+        <Border Classes="sheet" Width="560" Padding="32,28" CornerRadius="24" Background="{DynamicResource Brush.CardSolid}"
+                BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center" BoxShadow="0 18 56 0 #80000000">
+            <StackPanel>
+                <TextBlock Text="{Binding Title}" Classes="h2" FontSize="20" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Title}" />
+                <TextBlock Text="{Binding Note}" Classes="muted" Foreground="{DynamicResource Brush.Warning}" TextWrapping="Wrap" Margin="0,8,0,0" IsVisible="{Binding HasNote}" />
+                <c:RingArc Width="24" Height="24" StrokeThickness="3" Stroke="{DynamicResource Brush.Accent}" HorizontalAlignment="Left" Margin="0,16,0,0"
+                           IsSpinning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+                <ScrollViewer MaxHeight="460" Margin="0,14,0,0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <SelectableTextBlock Text="{Binding Words}" FontSize="14" LineHeight="22" TextWrapping="Wrap" />
+                </ScrollViewer>
+                <Button Classes="primary" Content="{loc:Str download.close}" Command="{Binding CloseCommand}" HorizontalAlignment="Right" MinWidth="110" Padding="22,11" Margin="0,20,0,0" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

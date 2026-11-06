@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.PlayerBar">
+    <Border Classes="card rise" Margin="26,6,26,14" Padding="14,10" CornerRadius="16" IsVisible="{Binding IsOpen}" BoxShadow="0 8 24 0 #22000000">
+        <Grid ColumnDefinitions="Auto,Auto,Auto,220,*,Auto,Auto,Auto,Auto">
+            <Button Classes="icon" Command="{Binding PreviousCommand}" IsEnabled="{Binding CanGoBack}" ToolTip.Tip="{loc:Str player.previous}">
+                <mi:MaterialIcon Kind="SkipPrevious" Width="20" Height="20" />
+            </Button>
+            <Button Grid.Column="1" Classes="roundPlay" Width="38" Height="38" Margin="4,0" Command="{Binding PlayPauseCommand}">
+                <Panel>
+                    <mi:MaterialIcon Kind="Play" Width="20" Height="20" IsVisible="{Binding !IsPlaying}" />
+                    <mi:MaterialIcon Kind="Pause" Width="20" Height="20" IsVisible="{Binding IsPlaying}" />
+                </Panel>
+            </Button>
+            <Button Grid.Column="2" Classes="icon" Command="{Binding NextCommand}" IsEnabled="{Binding HasNext}" ToolTip.Tip="{loc:Str player.next}">
+                <mi:MaterialIcon Kind="SkipNext" Width="20" Height="20" />
+            </Button>
+            <!-- the name is one button: it opens what plays next -->
+            <Button x:Name="TitleArea" Grid.Column="3" Classes="subtle" Margin="6,0" Padding="8,4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                    Command="{Binding ToggleQueueCommand}" ToolTip.Tip="{loc:Str player.queue.show}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Title}" FontSize="13.5" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush.Text}" />
+                        <TextBlock Text="{Binding FolderName}" Classes="caption" TextTrimming="CharacterEllipsis" Margin="0,1,0,0" />
+                    </StackPanel>
+                    <Panel Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center">
+                        <mi:MaterialIcon Kind="ChevronUp" Width="16" Height="16" IsVisible="{Binding !IsQueueOpen}" />
+                        <mi:MaterialIcon Kind="ChevronDown" Width="16" Height="16" IsVisible="{Binding IsQueueOpen}" />
+                    </Panel>
+                </Grid>
+            </Button>
+            <Popup Grid.Column="3" IsOpen="{Binding IsQueueOpen, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementTarget="{Binding #TitleArea}" Placement="TopEdgeAlignedLeft" VerticalOffset="-8">
+                <Border Width="460" CornerRadius="16" Padding="0,12,0,8" Background="{DynamicResource Brush.CardSolid}" BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="{loc:Str player.queue}" FontSize="15" FontWeight="SemiBold" Margin="18,0" Foreground="{DynamicResource Brush.Text}" />
+                        <TextBlock Text="{Binding QueueLine}" Classes="caption" TextTrimming="CharacterEllipsis" Margin="18,2,18,8" />
+                        <ScrollViewer MaxHeight="342" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding Queue}" Margin="8,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Classes="subtle" Height="38" Padding="10,0,12,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" Command="{Binding PlayCommand}">
+                                            <Grid ColumnDefinitions="28,*,Auto">
+                                                <mi:MaterialIcon Kind="MusicNote" Width="15" Height="15" HorizontalAlignment="Left" IsVisible="{Binding IsIdle}" />
+                                                <mi:MaterialIcon Kind="VolumeHigh" Width="15" Height="15" HorizontalAlignment="Left" Foreground="{DynamicResource Brush.Accent}" IsVisible="{Binding IsSounding}" />
+                                                <mi:MaterialIcon Kind="Pause" Width="15" Height="15" HorizontalAlignment="Left" Foreground="{DynamicResource Brush.Accent}" IsVisible="{Binding IsPaused}" />
+                                                <TextBlock Grid.Column="1" Classes="rowName" Classes.playing="{Binding IsCurrent}" Text="{Binding Name}" FontSize="13" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="2" Text="{Binding SizeText}" Classes="caption" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Popup>
+            <Grid Grid.Column="4" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+                <Panel MinWidth="40">
+                    <TextBlock Text="{Binding ElapsedText}" Classes="caption" VerticalAlignment="Center" HorizontalAlignment="Right" IsVisible="{Binding !IsLoading}" />
+                </Panel>
+                <Slider Grid.Column="1" Classes="player" Minimum="0" Maximum="{Binding Duration}" Value="{Binding Position}" Margin="10,0" IsVisible="{Binding !IsLoading}" />
+                <TextBlock Grid.Column="1" Text="{loc:Str player.loading}" Classes="caption" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsLoading}" />
+                <TextBlock Grid.Column="2" Text="{Binding TotalText}" Classes="caption" VerticalAlignment="Center" MinWidth="36" IsVisible="{Binding !IsLoading}" />
+            </Grid>
+            <Button Grid.Column="5" Classes="icon" Margin="8,0,0,0" Command="{Binding OpenLyricsCommand}" ToolTip.Tip="{loc:Str menu.row.lyrics}">
+                <mi:MaterialIcon Kind="CommentTextOutline" Width="18" Height="18" />
+            </Button>
+            <Button Grid.Column="6" Classes="icon" Command="{Binding DownloadTrackCommand}" ToolTip.Tip="{Binding DownloadTip}">
+                <Panel>
+                    <mi:MaterialIcon Kind="Download" Width="18" Height="18" IsVisible="{Binding !IsDownloaded}" />
+                    <mi:MaterialIcon Kind="CheckCircleOutline" Width="18" Height="18" IsVisible="{Binding IsDownloaded}" />
+                </Panel>
+            </Button>
+            <StackPanel Grid.Column="7" Orientation="Horizontal" Margin="8,0,6,0">
+                <Button Classes="icon" Command="{Binding ToggleMuteCommand}" ToolTip.Tip="{Binding SpeakerTip}">
+                    <Panel>
+                        <mi:MaterialIcon Kind="VolumeHigh" Width="17" Height="17" IsVisible="{Binding !IsSilent}" />
+                        <mi:MaterialIcon Kind="VolumeOff" Width="17" Height="17" IsVisible="{Binding IsSilent}" />
+                    </Panel>
+                </Button>
+                <Slider Classes="player" Width="86" Minimum="0" Maximum="1" Value="{Binding Volume}" ToolTip.Tip="{loc:Str player.volume}" />
+            </StackPanel>
+            <Button Grid.Column="8" Classes="icon" Command="{Binding CloseCommand}" ToolTip.Tip="{loc:Str player.close}">
+                <mi:MaterialIcon Kind="Close" Width="18" Height="18" />
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

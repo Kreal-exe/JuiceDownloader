@@ -1,0 +1,223 @@
+<Window x:Class="JuiceDownloader.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:JuiceDownloader.Controls"
+        xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+        xmlns:v="clr-namespace:JuiceDownloader.Views"
+        xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+        mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        Title="JuiceDownloader" Width="1240" Height="800" MinWidth="980" MinHeight="480"
+        WindowStartupLocation="Manual" Background="Transparent"
+        FontFamily="{StaticResource Font.Body}" Foreground="{DynamicResource Brush.Text}"
+        TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType"
+        UseLayoutRounding="True" SnapsToDevicePixels="True">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="52" GlassFrameThickness="-1" ResizeBorderThickness="6" CornerRadius="0"
+                      UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+    </WindowChrome.WindowChrome>
+
+    <Window.InputBindings>
+        <KeyBinding Key="D1" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Overview}" />
+        <KeyBinding Key="D2" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Albums}" />
+        <KeyBinding Key="D3" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Unreleased}" />
+        <KeyBinding Key="D4" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Compilations}" />
+        <KeyBinding Key="D5" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.SessionEdits}" />
+        <KeyBinding Key="D6" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Originals}" />
+        <KeyBinding Key="D7" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Studio}" />
+        <KeyBinding Key="D8" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Instrumentals}" />
+        <KeyBinding Key="D9" Modifiers="Ctrl" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Remixes}" />
+        <KeyBinding Key="F5" Command="{Binding RefreshCatalogCommand}" />
+        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
+    </Window.InputBindings>
+
+    <Grid x:Name="Root" Background="{DynamicResource Brush.Bg}" ClipToBounds="True" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="RootScale" />
+        </Grid.RenderTransform>
+
+        <!-- ambient background -->
+        <Grid IsHitTestVisible="False" ClipToBounds="True">
+            <Ellipse x:Name="Blob1" Width="820" Height="820" Fill="{DynamicResource Brush.Blob1}"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-220,-320,0,0">
+                <Ellipse.RenderTransform><TranslateTransform x:Name="Blob1T" /></Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="Blob2" Width="720" Height="720" Fill="{DynamicResource Brush.Blob2}"
+                     HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-260,-200,0">
+                <Ellipse.RenderTransform><TranslateTransform x:Name="Blob2T" /></Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="Blob3" Width="640" Height="640" Fill="{DynamicResource Brush.Blob3}"
+                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,120,-380">
+                <Ellipse.RenderTransform><TranslateTransform x:Name="Blob3T" /></Ellipse.RenderTransform>
+            </Ellipse>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="52" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="236" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- title bar -->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
+                    <v:Logo Width="24" Height="24" WindowChrome.IsHitTestVisibleInChrome="True" />
+                    <TextBlock Text="{loc:Str app.name}" FontFamily="{StaticResource Font.Display}" FontSize="14.5" FontWeight="SemiBold"
+                               Margin="10,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0">
+                    <Button Style="{StaticResource IconButton}" Command="{Binding ToggleThemeCommand}" WindowChrome.IsHitTestVisibleInChrome="True"
+                            ToolTip="{loc:Str titlebar.theme}" Margin="0,0,10,0" FontSize="15">
+                        <Grid RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <RotateTransform />
+                            </Grid.RenderTransform>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsDarkTheme}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="0" Duration="0:0:0.5">
+                                                            <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.5" /></DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="180" Duration="0:0:0.5">
+                                                            <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.5" /></DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock Text="&#xE708;" Style="{StaticResource Glyph}" FontSize="15" Visibility="{Binding IsDarkTheme, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock Text="&#xE706;" Style="{StaticResource Glyph}" FontSize="15" Visibility="{Binding IsDarkTheme, Converter={StaticResource BoolToVisInverse}}" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform><RotateTransform Angle="180" /></TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Style="{StaticResource SubtleButton}" Command="{Binding RefreshCatalogCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,0,12,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE72C;" Style="{StaticResource Glyph}" FontSize="13"
+                                       Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVisInverse}}" />
+                            <c:Arc StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" StartAngle="0" EndAngle="270" Width="13" Height="13" VerticalAlignment="Center"
+                                   StrokeStartLineCap="Round" StrokeEndLineCap="Round" c:Spin.IsActive="{Binding IsRefreshing}"
+                                   Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock Text="{Binding RefreshText}" Margin="8,0,0,0" FontSize="12.5" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="MinButton" Style="{StaticResource CaptionButton}" Content="&#xE921;" Click="OnMinimize" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="{loc:Str titlebar.minimize}" />
+                    <Button x:Name="MaxButton" Style="{StaticResource CaptionButton}" Content="&#xE922;" Click="OnMaximize" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="{loc:Str titlebar.maximize}" />
+                    <Button Style="{StaticResource CaptionCloseButton}" Content="&#xE8BB;" Click="OnClose" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="{loc:Str titlebar.close}" />
+                </StackPanel>
+            </Grid>
+
+            <!-- sidebar -->
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0,4,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- sixteen rows: on a short window they scroll, and the indicator scrolls with them -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Grid Margin="0,4,0,4" x:Name="NavGrid">
+                        <StackPanel>
+                            <RadioButton x:Name="NavOverview" Style="{StaticResource NavItem}" Tag="&#xE80F;" Content="{loc:Str nav.overview}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavAlbums" Style="{StaticResource NavItem}" Tag="&#xE93C;" Content="{loc:Str nav.albums}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavUnreleased" Style="{StaticResource NavItem}" Tag="&#xE8D6;" Content="{loc:Str nav.unreleased}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavCompilations" Style="{StaticResource NavItem}" Tag="&#xE8F1;" Content="{loc:Str nav.compilations}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavSessionEdits" Style="{StaticResource NavItem}" Tag="&#xE70F;" Content="{loc:Str nav.sessionEdits}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavOriginals" Style="{StaticResource NavItem}" Tag="&#xE8A5;" Content="{loc:Str nav.originals}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavStudio" Style="{StaticResource NavItem}" Tag="&#xE720;" Content="{loc:Str nav.studio}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavInstrumentals" Style="{StaticResource NavItem}" Tag="&#xEC4F;" Content="{loc:Str nav.instrumentals}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavRemixes" Style="{StaticResource NavItem}" Tag="&#xE8EE;" Content="{loc:Str nav.remixes}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavSnippets" Style="{StaticResource NavItem}" Tag="&#xE8C6;" Content="{loc:Str nav.snippets}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavMedia" Style="{StaticResource NavItem}" Tag="&#xEB9F;" Content="{loc:Str nav.media}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavRules" Style="{StaticResource NavItem}" Tag="&#xE71C;" Content="{loc:Str nav.rules}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavLyrics" Style="{StaticResource NavItem}" Tag="&#xE8BD;" Content="{loc:Str nav.lyrics}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavGaps" Style="{StaticResource NavItem}" Tag="&#xE721;" Content="{loc:Str nav.gaps}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavSettings" Style="{StaticResource NavItem}" Tag="&#xE713;" Content="{loc:Str nav.settings}" Checked="OnNavChecked" />
+                            <RadioButton x:Name="NavAbout" Style="{StaticResource NavItem}" Tag="&#xE946;" Content="{loc:Str nav.about}" Checked="OnNavChecked" />
+                        </StackPanel>
+                        <!-- sliding accent indicator: centred on a row of 32 under a margin of 1 -->
+                        <Border x:Name="NavIndicator" Width="4" Height="22" CornerRadius="2" Background="{DynamicResource Brush.AccentGradient}"
+                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,5,0,0" IsHitTestVisible="False">
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="NavIndicatorT" />
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect Color="{DynamicResource Color.Accent}" BlurRadius="12" ShadowDepth="0" Opacity="0.8" />
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                </ScrollViewer>
+
+                <!-- what is selected -->
+                <Border Grid.Row="1" Style="{StaticResource Card}" Margin="16,8,16,20" Padding="16" CornerRadius="16">
+                    <StackPanel>
+                        <TextBlock Text="{loc:Str download.selected}" Style="{StaticResource Caption}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <TextBlock c:Counter.Bytes="{Binding SelectedBytes}" c:Counter.Part="Number" FontFamily="{StaticResource Font.Display}" FontSize="24" FontWeight="SemiBold" />
+                            <TextBlock c:Counter.Bytes="{Binding SelectedBytes}" c:Counter.Part="Unit" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource Brush.TextMuted}"
+                                       VerticalAlignment="Bottom" Margin="5,0,0,4" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding SelectedFilesText}" Style="{StaticResource Caption}" Margin="0,2,0,0" />
+                        <Button Style="{StaticResource PrimaryButton}" Content="{loc:Str download.button}" Command="{Binding Download.StartCommand}" IsEnabled="{Binding CanDownload}"
+                                HorizontalAlignment="Stretch" Margin="0,12,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- pages -->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0,4,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <c:PageHost x:Name="Pages" />
+                <!-- under the pages, not over them: the lists end above it -->
+                <v:PlayerBar Grid.Row="1" DataContext="{Binding Player}" />
+                <v:PreviewSheet Grid.RowSpan="2" DataContext="{Binding Preview}" />
+            </Grid>
+        </Grid>
+
+        <!-- overlays -->
+        <v:DownloadOverlay x:Name="Overlay" Visibility="Collapsed" />
+        <v:LyricsSheet DataContext="{Binding LyricsSheet}" />
+        <v:ConfirmDialog x:Name="Confirm" Visibility="Collapsed" />
+
+        <!-- toast -->
+        <Border x:Name="Toast" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,64,28,0" Padding="16,12"
+                CornerRadius="14" Background="{DynamicResource Brush.Popup}" BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1"
+                Visibility="Collapsed" Opacity="0" IsHitTestVisible="False">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="ToastT" />
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="28" ShadowDepth="6" Opacity="0.35" Color="Black" />
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="30" Height="30" CornerRadius="9" Background="{DynamicResource Brush.SuccessSoft}">
+                    <TextBlock x:Name="ToastGlyph" Style="{StaticResource Glyph}" FontSize="13" Foreground="{DynamicResource Brush.Success}" />
+                </Border>
+                <TextBlock x:Name="ToastText" FontSize="13.5" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,0,4,0" MaxWidth="420" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

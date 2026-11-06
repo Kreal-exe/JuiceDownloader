@@ -1,0 +1,221 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:JuiceDownloader.Controls"
+        xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+        xmlns:v="clr-namespace:JuiceDownloader.Views"
+        xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+        xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        x:Class="JuiceDownloader.Views.MainWindow"
+        Title="JuiceDownloader" Width="1240" Height="840" MinWidth="980" MinHeight="560"
+        WindowStartupLocation="CenterScreen" Icon="avares://JuiceDownloader/Assets/icon.png"
+        Background="{DynamicResource Brush.Bg}" Foreground="{DynamicResource Brush.Text}"
+        FontFamily="{StaticResource Font.Body}">
+
+    <!-- Linux keeps the desktop's own title bar (GNOME, KDE and tiling window managers draw it); the app's header sits below it. -->
+    <Window.KeyBindings>
+        <KeyBinding Gesture="Ctrl+D1" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Overview}" />
+        <KeyBinding Gesture="Ctrl+D2" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Albums}" />
+        <KeyBinding Gesture="Ctrl+D3" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Unreleased}" />
+        <KeyBinding Gesture="Ctrl+D4" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Compilations}" />
+        <KeyBinding Gesture="Ctrl+D5" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.SessionEdits}" />
+        <KeyBinding Gesture="Ctrl+D6" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Originals}" />
+        <KeyBinding Gesture="Ctrl+D7" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Studio}" />
+        <KeyBinding Gesture="Ctrl+D8" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Instrumentals}" />
+        <KeyBinding Gesture="Ctrl+D9" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:AppPage.Remixes}" />
+        <KeyBinding Gesture="F5" Command="{Binding RefreshCatalogCommand}" />
+        <KeyBinding Gesture="Escape" Command="{Binding EscapeCommand}" />
+    </Window.KeyBindings>
+
+    <Window.Styles>
+        <Style Selector="Button.nav mi|MaterialIcon">
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Height" Value="18" />
+        </Style>
+        <Style Selector="Button.nav StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Spacing" Value="14" />
+        </Style>
+        <Style Selector="Button.nav TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="13.5" />
+        </Style>
+    </Window.Styles>
+
+    <Grid x:Name="Root" ClipToBounds="True" Classes.motion="{Binding Settings.Animations}">
+
+        <!-- ambient background -->
+        <Grid IsHitTestVisible="False" ClipToBounds="True">
+            <Ellipse Classes="blob1" Width="820" Height="820" Fill="{DynamicResource Brush.Blob1}"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-220,-320,0,0" />
+            <Ellipse Classes="blob2" Width="720" Height="720" Fill="{DynamicResource Brush.Blob2}"
+                     HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-260,-200,0" />
+            <Ellipse Classes="blob3" Width="640" Height="640" Fill="{DynamicResource Brush.Blob3}"
+                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,120,-380" />
+        </Grid>
+
+        <Grid RowDefinitions="60,*" ColumnDefinitions="236,*">
+
+            <!-- header -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="22,0,0,0" VerticalAlignment="Center" Spacing="10">
+                <v:Logo Width="26" Height="26" />
+                <TextBlock Text="{loc:Str app.name}" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="0,0,22,0" Spacing="10">
+                <Button Classes="ghost" Padding="12,7" Command="{Binding RefreshCatalogCommand}" IsEnabled="{Binding !IsRefreshing}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Panel Width="15" Height="15">
+                            <mi:MaterialIcon Kind="Refresh" Width="15" Height="15" IsVisible="{Binding !IsRefreshing}" />
+                            <c:RingArc StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsRefreshing}" IsVisible="{Binding IsRefreshing}" />
+                        </Panel>
+                        <TextBlock Text="{Binding RefreshText}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Button Classes="icon" Command="{Binding ToggleThemeCommand}">
+                    <Panel>
+                        <mi:MaterialIcon Kind="WeatherNight" Width="18" Height="18" IsVisible="{Binding IsDarkTheme}" />
+                        <mi:MaterialIcon Kind="WhiteBalanceSunny" Width="18" Height="18" IsVisible="{Binding !IsDarkTheme}" />
+                    </Panel>
+                </Button>
+            </StackPanel>
+
+            <!-- sidebar -->
+            <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="*,Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Panel Margin="0,6,0,0" VerticalAlignment="Top">
+                        <StackPanel>
+                            <StackPanel.Styles>
+                                <Style Selector="Button.nav">
+                                    <Setter Property="Margin" Value="12,0,12,4" />
+                                    <Setter Property="Command" Value="{Binding NavigateCommand}" />
+                                </Style>
+                            </StackPanel.Styles>
+                            <Button Classes="nav" Classes.active="{Binding IsOverviewPage}" CommandParameter="{x:Static vm:AppPage.Overview}">
+                                <StackPanel><mi:MaterialIcon Kind="ViewDashboardOutline" /><TextBlock Text="{loc:Str nav.overview}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Albums}" CommandParameter="{x:Static vm:AppPage.Albums}">
+                                <StackPanel><mi:MaterialIcon Kind="Album" /><TextBlock Text="{loc:Str nav.albums}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Unreleased}" CommandParameter="{x:Static vm:AppPage.Unreleased}">
+                                <StackPanel><mi:MaterialIcon Kind="MusicNoteOutline" /><TextBlock Text="{loc:Str nav.unreleased}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Compilations}" CommandParameter="{x:Static vm:AppPage.Compilations}">
+                                <StackPanel><mi:MaterialIcon Kind="PlaylistMusicOutline" /><TextBlock Text="{loc:Str nav.compilations}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=SessionEdits}" CommandParameter="{x:Static vm:AppPage.SessionEdits}">
+                                <StackPanel><mi:MaterialIcon Kind="ContentCut" /><TextBlock Text="{loc:Str nav.sessionEdits}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Originals}" CommandParameter="{x:Static vm:AppPage.Originals}">
+                                <StackPanel><mi:MaterialIcon Kind="FileMusicOutline" /><TextBlock Text="{loc:Str nav.originals}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Studio}" CommandParameter="{x:Static vm:AppPage.Studio}">
+                                <StackPanel><mi:MaterialIcon Kind="MicrophoneOutline" /><TextBlock Text="{loc:Str nav.studio}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Instrumentals}" CommandParameter="{x:Static vm:AppPage.Instrumentals}">
+                                <StackPanel><mi:MaterialIcon Kind="Piano" /><TextBlock Text="{loc:Str nav.instrumentals}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Remixes}" CommandParameter="{x:Static vm:AppPage.Remixes}">
+                                <StackPanel><mi:MaterialIcon Kind="TuneVariant" /><TextBlock Text="{loc:Str nav.remixes}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Snippets}" CommandParameter="{x:Static vm:AppPage.Snippets}">
+                                <StackPanel><mi:MaterialIcon Kind="MovieOpenOutline" /><TextBlock Text="{loc:Str nav.snippets}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding CurrentPage, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=Media}" CommandParameter="{x:Static vm:AppPage.Media}">
+                                <StackPanel><mi:MaterialIcon Kind="ImageMultipleOutline" /><TextBlock Text="{loc:Str nav.media}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding IsRulesPage}" CommandParameter="{x:Static vm:AppPage.Rules}">
+                                <StackPanel><mi:MaterialIcon Kind="FilterVariant" /><TextBlock Text="{loc:Str nav.rules}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding IsLyricsPage}" CommandParameter="{x:Static vm:AppPage.Lyrics}">
+                                <StackPanel><mi:MaterialIcon Kind="TextBoxOutline" /><TextBlock Text="{loc:Str nav.lyrics}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding IsGapsPage}" CommandParameter="{x:Static vm:AppPage.Gaps}">
+                                <StackPanel><mi:MaterialIcon Kind="TextSearch" /><TextBlock Text="{loc:Str nav.gaps}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding IsSettingsPage}" CommandParameter="{x:Static vm:AppPage.Settings}">
+                                <StackPanel><mi:MaterialIcon Kind="CogOutline" /><TextBlock Text="{loc:Str nav.settings}" /></StackPanel>
+                            </Button>
+                            <Button Classes="nav" Classes.active="{Binding IsAboutPage}" CommandParameter="{x:Static vm:AppPage.About}">
+                                <StackPanel><mi:MaterialIcon Kind="InformationOutline" /><TextBlock Text="{loc:Str nav.about}" /></StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <!-- sliding accent indicator: one 36 px row per page -->
+                        <Border Width="4" Height="22" CornerRadius="2" Background="{DynamicResource Brush.AccentGradient}"
+                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,5,0,0" IsHitTestVisible="False"
+                                BoxShadow="0 0 12 0 #CC7C6CFF"
+                                RenderTransform="{Binding CurrentPage, Converter={x:Static c:PageOffsetConverter.Instance}}">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.35" Easing="BackEaseOut" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+                    </Panel>
+                </ScrollViewer>
+
+                <!-- what is selected -->
+                <Border Grid.Row="1" Classes="card" Margin="16,8,16,20" Padding="16,14" CornerRadius="16">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <mi:MaterialIcon Kind="CheckboxMarkedCircleOutline" Width="16" Height="16" Foreground="{DynamicResource Brush.Accent}" />
+                            <TextBlock Text="{loc:Str download.selected}" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <c:CounterText Bytes="{Binding SelectedBytes}" Part="Number" FontSize="24" FontWeight="Bold" />
+                            <c:CounterText Bytes="{Binding SelectedBytes}" Part="Unit" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource Brush.TextMuted}" VerticalAlignment="Bottom" Margin="5,0,0,4" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding SelectedLine}" Classes="caption" />
+                        <Button Classes="primary" Padding="14,10" FontSize="14" Margin="0,10,0,0" HorizontalAlignment="Stretch"
+                                Command="{Binding StartDownloadCommand}" IsEnabled="{Binding CanDownload}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <mi:MaterialIcon Kind="TrayArrowDown" Width="16" Height="16" />
+                                <TextBlock Text="{loc:Str download.button}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- pages -->
+            <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="*,Auto">
+              <Panel>
+                <v:OverviewView Classes="page" IsVisible="{Binding IsOverviewPage}" />
+                <!-- one view for the ten sections; its own DataContext is the section, so the visibility binds to the window's -->
+                <v:SectionView x:Name="Section" Classes="page" IsVisible="{Binding #Root.DataContext.IsSectionPage}" DataContext="{Binding CurrentSection}" />
+                <v:LyricsView Classes="page" IsVisible="{Binding #Root.DataContext.IsLyricsPage}" DataContext="{Binding Lyrics}" />
+                <v:SettingsView Classes="page" IsVisible="{Binding IsSettingsPage}" />
+                <v:RulesView Classes="page" IsVisible="{Binding #Root.DataContext.IsRulesPage}" DataContext="{Binding Rules}" />
+                <v:GapsView Classes="page" IsVisible="{Binding #Root.DataContext.IsGapsPage}" DataContext="{Binding Gaps}" />
+                <v:AboutView Classes="page" IsVisible="{Binding IsAboutPage}" />
+              </Panel>
+              <!-- below the pages, so their lists end above it -->
+              <v:PlayerBar Grid.Row="1" DataContext="{Binding Player}" />
+              <v:PreviewSheet Grid.RowSpan="2" IsVisible="{Binding #Root.DataContext.Preview.IsOpen}" DataContext="{Binding Preview}" />
+            </Grid>
+        </Grid>
+
+        <!-- overlays -->
+        <v:DownloadOverlay IsVisible="{Binding #Root.DataContext.Download.IsOpen}" DataContext="{Binding Download}" />
+        <v:LyricsSheet IsVisible="{Binding #Root.DataContext.LyricsSheet.IsOpen}" DataContext="{Binding LyricsSheet}" />
+        <v:ConfirmDialog x:Name="Confirm" IsVisible="False" />
+
+        <!-- toast -->
+        <Border x:Name="Toast" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,70,28,0" Padding="16,12"
+                CornerRadius="14" Background="{DynamicResource Brush.Popup}" BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1"
+                BoxShadow="0 6 28 0 #59000000" Opacity="0" IsHitTestVisible="False" RenderTransform="translateY(-12px)">
+            <Border.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.25" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.35" Easing="BackEaseOut" />
+                </Transitions>
+            </Border.Transitions>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="30" Height="30" CornerRadius="9" Background="{DynamicResource Brush.WarningSoft}">
+                    <mi:MaterialIcon x:Name="ToastIcon" Kind="AlertCircleOutline" Width="15" Height="15" Foreground="{DynamicResource Brush.Warning}" />
+                </Border>
+                <TextBlock x:Name="ToastText" FontSize="13.5" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,0,4,0" MaxWidth="420" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

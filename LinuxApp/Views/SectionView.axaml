@@ -1,0 +1,91 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:v="clr-namespace:JuiceDownloader.Views"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.SectionView">
+    <Grid x:Name="Body" Classes="rise" RowDefinitions="Auto,*">
+
+        <!-- header -->
+        <StackPanel x:Name="Header" Margin="32,6,32,14">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Title}" Classes="h1" />
+                    <TextBlock Text="{Binding Subtitle}" Classes="muted" Margin="0,4,0,0" />
+                </StackPanel>
+                <TextBox Grid.Column="1" Classes="search" Width="320" VerticalAlignment="Center"
+                         Watermark="{loc:Str library.search}" Text="{Binding Query}">
+                    <TextBox.InnerLeftContent>
+                        <mi:MaterialIcon Kind="Magnify" Width="18" Height="18" Margin="12,0,0,0" Foreground="{DynamicResource Brush.TextMuted}" />
+                    </TextBox.InnerLeftContent>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,14,0,0" ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding Description}" Classes="muted" FontSize="12.5" TextWrapping="Wrap" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
+                    <TextBlock Text="{loc:Str library.select}" Classes="caption" VerticalAlignment="Center" Margin="0,0,4,0" />
+                    <Button Classes="subtle" Content="{loc:Str library.selectAll}" Command="{Binding SelectAllCommand}" />
+                    <Button Classes="subtle" Content="{loc:Str library.selectNone}" Command="{Binding SelectNoneCommand}" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <!-- no catalog yet -->
+        <v:CatalogStateView Grid.Row="1" Margin="32,2,32,28" VerticalAlignment="Top" DataContext="{Binding $parent[Window].DataContext}"
+                            IsVisible="{Binding $parent[Window].DataContext.HasCatalog, Converter={x:Static BoolConverters.Not}}" />
+        <TextBlock Grid.Row="1" Text="{loc:Str library.noResults}" Classes="muted" Margin="36,12,32,0" IsVisible="{Binding IsEmpty}" />
+
+        <!-- the list: only what is on screen exists as controls -->
+        <ListBox x:Name="List" Grid.Row="1" Classes="rows" Padding="32,2,32,28" ItemsSource="{Binding Rows}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Panel Margin="{Binding Indent}">
+                        <Button Classes="listed" Classes.cardButton="{Binding IsTop}" Classes.flat="{Binding IsTop}" Classes.row="{Binding !IsTop}"
+                                HorizontalAlignment="Stretch" Command="{Binding ClickCommand}" DoubleTapped="OnRowDoubleTapped" ContextRequested="OnRowContext">
+                            <Grid ColumnDefinitions="Auto,Auto,*,40,40,Auto,40">
+                                <CheckBox Classes="check" IsChecked="{Binding IsChecked, Mode=OneWay}" Command="{Binding CheckCommand}"
+                                          IsEnabled="{Binding HasFiles}" Margin="0,0,14,0" />
+                                <Border Grid.Column="1" Classes="tile" Width="38" Height="38" CornerRadius="11" IsVisible="{Binding IsTop}"
+                                        PointerPressed="OnMarkPressed" DoubleTapped="OnMarkDoubleTapped"
+                                        Background="{Binding $parent[ListBox].DataContext.SoftBrush}">
+                                    <mi:MaterialIcon Kind="{Binding Glyph}" Width="18" Height="18" Foreground="{Binding $parent[ListBox].DataContext.Brush}" />
+                                </Border>
+                                <mi:MaterialIcon Grid.Column="1" Kind="{Binding Glyph}" Width="17" Height="17" VerticalAlignment="Center"
+                                                 PointerPressed="OnMarkPressed" DoubleTapped="OnMarkDoubleTapped" Background="Transparent"
+                                                 Foreground="{DynamicResource Brush.TextMuted}" IsVisible="{Binding !IsTop}" />
+                                <StackPanel Grid.Column="2" Margin="14,0,16,0" VerticalAlignment="Center">
+                                    <TextBlock Classes="rowName" Classes.top="{Binding IsTop}" Classes.playing="{Binding IsCurrent}" Text="{Binding Name}" ToolTip.Tip="{Binding Name}" />
+                                    <TextBlock Text="{Binding Line}" Classes="caption" Margin="0,2,0,0" IsVisible="{Binding IsFolder}" />
+                                    <TextBlock Text="{Binding Place}" Classes="caption" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" IsVisible="{Binding HasPlace}" />
+                                </StackPanel>
+                                <Button Grid.Column="3" Classes="roundPlay rowPlay" Classes.playable="{Binding HasPreview}"
+                                        Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding PreviewCommand}" ToolTip.Tip="{loc:Str preview.open}">
+                                    <mi:MaterialIcon Kind="EyeOutline" Width="17" Height="17" />
+                                </Button>
+                                <Button Grid.Column="3" Classes="roundPlay rowPlay" Classes.playable="{Binding IsPlayable}" Classes.current="{Binding IsCurrent}"
+                                        Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding PlayCommand}" ToolTip.Tip="{loc:Str player.playable}">
+                                    <Panel>
+                                        <mi:MaterialIcon Kind="Play" Width="17" Height="17" IsVisible="{Binding !IsPlayingNow}" />
+                                        <mi:MaterialIcon Kind="Pause" Width="17" Height="17" IsVisible="{Binding IsPlayingNow}" />
+                                    </Panel>
+                                </Button>
+                                <Button Grid.Column="4" Classes="roundPlay rowPlay" Classes.playable="{Binding IsFile}" Classes.current="{Binding IsCurrent}"
+                                        Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding DownloadCommand}" ToolTip.Tip="{loc:Str library.downloadOne}">
+                                    <mi:MaterialIcon Kind="Download" Width="17" Height="17" />
+                                </Button>
+                                <TextBlock Grid.Column="5" Text="{Binding SizeText}" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Button Grid.Column="6" Classes="icon" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding OpenCommand}" IsVisible="{Binding IsFolder}">
+                                    <Panel>
+                                        <mi:MaterialIcon Kind="ChevronDown" Width="20" Height="20" IsVisible="{Binding !Expanded}" />
+                                        <mi:MaterialIcon Kind="ChevronUp" Width="20" Height="20" IsVisible="{Binding Expanded}" />
+                                    </Panel>
+                                </Button>
+                            </Grid>
+                        </Button>
+                    </Panel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

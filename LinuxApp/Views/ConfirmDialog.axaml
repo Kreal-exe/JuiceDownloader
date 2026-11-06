@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.ConfirmDialog">
+    <Grid Background="{DynamicResource Brush.Overlay}">
+        <Border Classes="sheet" Width="480" Padding="30,28,30,24" CornerRadius="24"
+                Background="{DynamicResource Brush.CardSolid}" BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center" BoxShadow="0 18 56 0 #80000000">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="14">
+                    <Border x:Name="IconTile" Classes="tile" Width="44" Height="44" CornerRadius="14" Background="{DynamicResource Brush.AccentSoft}">
+                        <mi:MaterialIcon x:Name="Icon" Kind="TrayArrowDown" Width="20" Height="20" Foreground="{DynamicResource Brush.Accent}" />
+                    </Border>
+                    <TextBlock x:Name="TitleText" Classes="h2" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="360" />
+                </StackPanel>
+                <TextBlock x:Name="BodyText" Classes="muted" TextWrapping="Wrap" LineHeight="21" Margin="0,16,0,0" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,26,0,0">
+                    <Button x:Name="CancelButton" Classes="ghost" Content="{loc:Str common.cancel}" Padding="18,11" Click="OnCancel" />
+                    <Button x:Name="OkButton" Classes="primary" Padding="22,11" FontSize="14" Click="OnOk" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,48 @@
+# Run by hand: builds the Windows app, opens each page on a Windows runner and captures it with tools/capture.ps1.
+# The PNGs come back as the "windows-screenshots" artifact, for docs/.
+name: Screenshots
+
+on:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish
+        run: >
+          dotnet publish src/JuiceDownloader/JuiceDownloader.csproj -c Release -r win-x64
+          --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none
+          -o publish/sc
+
+      - name: Capture
+        shell: pwsh
+        run: |
+          try { Set-DisplayResolution -Width 1920 -Height 1080 -Force -ErrorAction Stop } catch { Write-Host "Resolution unchanged: $_" }
+          $dir = Join-Path $env:RUNNER_TEMP "jc"
+          New-Item -ItemType Directory -Force $dir | Out-Null
+          $env:JUICEDOWNLOADER_SETTINGS = Join-Path $dir "settings.json"
+          function Shot([string]$Name, [string]$Page, [string]$Theme, [int]$Wheel = 0, [int]$Wait = 20) {
+            @{ theme = $Theme; language = "en"; windowWidth = 1240; windowHeight = 800 } | ConvertTo-Json | Set-Content $env:JUICEDOWNLOADER_SETTINGS
+            $p = Start-Process publish/sc/JuiceDownloader.exe -ArgumentList "--page", $Page -PassThru
+            Start-Sleep -Seconds $Wait
+            ./tools/capture.ps1 -ProcessId $p.Id -Out "shots/$Name.png" -Wheel $Wheel
+            Stop-Process -Id $p.Id -Force
+            Start-Sleep -Seconds 2
+          }
+          Shot overview Overview dark
+          Shot albums Albums dark
+          Shot unreleased Unreleased light
+          Shot lyrics Lyrics dark
+          Shot settings Settings dark
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-screenshots
+          path: shots/*.png

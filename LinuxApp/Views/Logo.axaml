@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="JuiceDownloader.Views.Logo"
+             Width="24" Height="24">
+    <!-- tools/icon/make_icon.m draws it -->
+    <Image Source="avares://JuiceDownloader/Assets/logo.png" Stretch="Uniform" RenderOptions.BitmapInterpolationMode="HighQuality" />
+</UserControl>

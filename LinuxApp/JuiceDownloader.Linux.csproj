@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    JuiceDownloader for Linux: Avalonia UI over the engine shared with the Windows app (linked from
+    src/JuiceDownloader/Core). The version is the <Version> of src/JuiceDownloader/JuiceDownloader.csproj, shared by all three apps.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>JuiceDownloader</AssemblyName>
+    <RootNamespace>JuiceDownloader</RootNamespace>
+    <Authors>Kreal-exe</Authors>
+    <Product>JuiceDownloader</Product>
+    <Description>A desktop client for the Juice WRLD API: pick albums, sessions and unreleased tracks, and download them with lyrics.</Description>
+    <Copyright>Copyright © 2026 Kreal-exe</Copyright>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+      </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <!-- the platform-neutral engine shared with the Windows app -->
+  <ItemGroup>
+    <Compile Include="..\src\JuiceDownloader\Core\*.cs" Link="Core\Shared\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- the Windows app's translations, then the Linux wording laid over them -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\src\JuiceDownloader\Localization\Strings\*.json" Link="Strings\%(Filename)%(Extension)" LogicalName="Strings.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="Resources\Strings\*.json" LogicalName="Strings-linux.%(Filename)%(Extension)" />
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.22" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="2.4.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <!-- One version for all apps: read it from the Windows project before the assembly info is generated. -->
+  <Target Name="ShareVersion" BeforeTargets="GetAssemblyVersion;GenerateAssemblyInfo;GetPackageVersion">
+    <XmlPeek XmlInputPath="..\src\JuiceDownloader\JuiceDownloader.csproj" Query="/Project/PropertyGroup/Version/text()">
+      <Output TaskParameter="Result" PropertyName="SharedVersion" />
+    </XmlPeek>
+    <PropertyGroup>
+      <Version>$(SharedVersion)</Version>
+      <AssemblyVersion>$(SharedVersion).0</AssemblyVersion>
+      <FileVersion>$(SharedVersion).0</FileVersion>
+      <InformationalVersion>$(SharedVersion)</InformationalVersion>
+    </PropertyGroup>
+  </Target>
+
+</Project>

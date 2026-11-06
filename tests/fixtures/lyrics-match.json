@@ -1,0 +1,661 @@
+{
+ "songs": [
+  {
+   "id": 95364,
+   "name": "Strong Minds",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/10. Outsiders (Sessions)/Strong Minds.mp3",
+   "track_titles": [
+    "Strong Minds",
+    "Go Berserk",
+    "Split Heads"
+   ],
+   "file_names": "File Name: JUICE WHEEZY\nSession Title: juice 4.ptx",
+   "era": {
+    "name": "OUT",
+    "description": "Outsiders"
+   },
+   "lyrics": "words of Strong Minds #95364",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96743,
+   "name": "Strong Minds",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Strong Minds",
+    "Go Berserk",
+    "Split Heads"
+   ],
+   "file_names": "JUICE WHEEZY",
+   "era": {
+    "name": "OUT",
+    "description": "Outsiders"
+   },
+   "lyrics": "words of Strong Minds #96743",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94316,
+   "name": "2MININHELL",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/1. JUICED UP THE EP (Sessions)/2MININHELL.mp3",
+   "track_titles": [
+    "2MININHELL",
+    "2MININHELL (Pt. 1)",
+    "2 Minutes In Hell (Pt. 1)"
+   ],
+   "file_names": "2MININHELL",
+   "era": {
+    "name": "jute",
+    "description": "JUICED UP THE EP"
+   },
+   "lyrics": "words of 2MININHELL #94316",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94636,
+   "name": "Persona (v1)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Persona (v1).mp3",
+   "track_titles": [
+    "Persona (v1)",
+    "Naruto"
+   ],
+   "file_names": "File Name (1): naruto\nFile Name (2): naruto_1\nSession Title: persona.ptx\nFolder Title: Persona",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Persona (v1) #94636",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94068,
+   "name": "All Girls Are The Same (Live)",
+   "category": "released",
+   "path": "Compilation/1. Released Discography/9. Up Next Session Juice WRLD/All Girls Are The Same (Live).mp3",
+   "track_titles": [
+    "All Girls Are The Same (Live)",
+    "AGATS (Pt. 1)",
+    "ALL GIRLS ARE THE SAME 999",
+    "Same (Pt. 1)",
+    "Same"
+   ],
+   "file_names": "N/A",
+   "era": {
+    "name": "UNS: JW",
+    "description": "Up Next Session: Juice WRLD"
+   },
+   "lyrics": "words of All Girls Are The Same (Live) #94068",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94111,
+   "name": "Bad Energy",
+   "category": "released",
+   "path": "Compilation/1. Released Discography/12. Legends Never Die/Bad Energy.mp3",
+   "track_titles": [
+    "Bad Energy",
+    "Bad Memories"
+   ],
+   "file_names": "File Name (Explicit): 04 Bad Energy (HD) - main (mastered ts)\nFile Name (Clean): 04 Bad Energy (HD - FIXED) - clean (mastered ts)\nFolder Title (Explicit): Juice WRLD Legends Never Die (EXPLICIT - HD - 21 Selections) (RE3) (mastered)\nFolder Title (Clean): Juice WRLD Legends Never Die (EDITED - HD - 21 Selections) (RE3) (mastered)",
+   "era": {
+    "name": "LND",
+    "description": "Legends Never Die"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94299,
+   "name": "Bad Energy (Extended Outro)",
+   "category": "released",
+   "path": "Compilation/3. Misc. Discography/5. Legends Never Die (Extended Outro Version)/Bad Energy (Extended Outro).mp3",
+   "track_titles": [
+    "Bad Energy (Extended Outro)",
+    "Bad Memories"
+   ],
+   "file_names": "06. bad energy w outro",
+   "era": {
+    "name": "LND (EOV)",
+    "description": "Legends Never Die extended outro version"
+   },
+   "lyrics": "words of Bad Energy (Extended Outro) #94299",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94112,
+   "name": "Blood On My Jeans",
+   "category": "released",
+   "path": "Compilation/1. Released Discography/12. Legends Never Die/Blood On My Jeans.mp3",
+   "track_titles": [
+    "Blood On My Jeans",
+    "On The Run"
+   ],
+   "file_names": "Explicit: 06 Blood on My Jeans (New - 7 6 20) (HD) - main (mastered ts)\nClean: 06 Blood on My Jeans (New - 7 6 20) (HD - FIXED) - clean (mastered ts)",
+   "era": {
+    "name": "LND",
+    "description": "Legends Never Die"
+   },
+   "lyrics": "words of Blood On My Jeans #94112",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94946,
+   "name": "Oh Yeah I Did (v1)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/8. WRLD ON DRUGS (Sessions)/Oh Yeah I Did.mp3",
+   "track_titles": [
+    "Oh Yeah I Did (v1)",
+    "Boondocks",
+    "Broke To Rich"
+   ],
+   "file_names": "File Name: OH YEAH I DID\nSession Title: OH YEAH I DID.ptx",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "words of Oh Yeah I Did (v1) #94946",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94966,
+   "name": "Pour Up A 6 (v2)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/8. WRLD ON DRUGS (Sessions)/Pour Up A 6 (v2).mp3",
+   "track_titles": [
+    "Pour Up A 6 (v2)",
+    "Call The Feds"
+   ],
+   "file_names": "File Name: 7_31_18 ROUGH 2\nSession Title: 7_31.ptx",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "words of Pour Up A 6 (v2) #94966",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96134,
+   "name": "Hey Wonderland",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Hey Wonderland",
+    "Wonderland"
+   ],
+   "file_names": "File Name (1): Hey Wonderland (ROUGH)\nFile Name (2): Hey Wonderland (JcraigMix) 138Bpm",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Hey Wonderland #96134",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96801,
+   "name": "Slasher (v2)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Slasher (v2).mp3",
+   "track_titles": [
+    "Slasher (v2)",
+    "MayDay"
+   ],
+   "file_names": "Session Title: shrrom30 v1.1 slasher.ptx\nFolder Title: shrrom30",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96800,
+   "name": "Slasher (v3)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Slasher (v3).mp3",
+   "track_titles": [
+    "Slasher (v3)",
+    "MayDay"
+   ],
+   "file_names": "Session Title: shrrom30 v1.2 slasher.ptx\nFolder Title: shrrom30",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94682,
+   "name": "Slasher (v5)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Slasher (v5).mp3",
+   "track_titles": [
+    "Slasher (v5)",
+    "Mayday"
+   ],
+   "file_names": "File Name: shrrom30 v1.4 slasher\nSession Title: shrrom30 v1.4 slasher.ptx\nFolder Title: shrrom30",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Slasher (v5) #94682",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94481,
+   "name": "Deprived",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Deprived.mp3",
+   "track_titles": [
+    "Deprived"
+   ],
+   "file_names": "File Name: Deprived (ROUGH)\nSession Title: Tears.ptx",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Deprived #94481",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96138,
+   "name": "Deprived",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Deprived"
+   ],
+   "file_names": "Deprived (ROUGH)",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 94928,
+   "name": "Move The Bale (with Unhkl Flex) [v2]",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/8. WRLD ON DRUGS (Sessions)/Move The Bale (with Unhkl Flex) [v2].mp3",
+   "track_titles": [
+    "Move The Bale (with Unhkl Flex) [v2]",
+    "The Bale"
+   ],
+   "file_names": "File Name: Move The Bell Rough\nSession Title: Move The Bell.ptx",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96722,
+   "name": "Move The Bale (with Unhkl Flex) [v2]",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Move The Bale (with Unhkl Flex) [v2]",
+    "The Bale"
+   ],
+   "file_names": "Move The Bell Rough",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "words of Move The Bale (with Unhkl Flex) [v2] #96722",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96721,
+   "name": "Move The Bale (with Unhkl Flex) [v3]",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Move The Bale (with Unhkl Flex)",
+    "The Bale"
+   ],
+   "file_names": "Move The Bell Rough_1",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "words of Move The Bale (with Unhkl Flex) [v3] #96721",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96809,
+   "name": "Move The Bale (with Unhkl Flex) [v3]",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/8. WRLD ON DRUGS (Sessions)/Move The Bale (with Unhkl Flex) [v3].mp3",
+   "track_titles": [
+    "Move The Bale (with Unhkl Flex) [v3]",
+    "The Bale"
+   ],
+   "file_names": "File Name: Move The Bell Rough_1\nSession Title: Move The Bell.1.ptx\nFolder Title: Move The Bell",
+   "era": {
+    "name": "WOD",
+    "description": "WRLD On Drugs"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 95741,
+   "name": "Move The Bale (with Unhkl Flex) [v1]",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/6. NOTHING'S DIFFERENT 3 (Sessions)/Move The Bale (with Unhkl Flex) [v1].mp3",
+   "track_titles": [
+    "Move The Bale (with Unhkl Flex) [v1]",
+    "The Bale"
+   ],
+   "file_names": "Session Title: move the bell.ptx\nFolder Title: Move The Bell",
+   "era": {
+    "name": "ND",
+    "description": "NOTHING'S DIFFERENT </3"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96489,
+   "name": "All Girls Are The Same",
+   "category": "released",
+   "path": "Compilation/1. Released Discography/7. Goodbye & Good Riddance/All Girls Are The Same.mp3",
+   "track_titles": [
+    "All Girls Are The Same",
+    "AGATS (Pt. 1)",
+    "ALL GIRLS ARE THE SAME 999",
+    "Same (Pt. 1)"
+   ],
+   "file_names": "N/A",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of All Girls Are The Same #96489",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96397,
+   "name": "Blood On My Jeans",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Blood On My Jeans",
+    "On The Run"
+   ],
+   "file_names": "File Name (1): Juice Wrld - on the run v1.2 (xr 11 GZ)\nFile Name (2): Juice Wrld - on the run v2.1 (xr 11 GZ)\nFile Name (3): Juice Wrld - on the run v2.2 (xr 11 GZ)",
+   "era": {
+    "name": "OUT",
+    "description": "Outsiders"
+   },
+   "lyrics": "",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 99001,
+   "name": "Freestyle",
+   "category": "unreleased",
+   "path": "",
+   "track_titles": [
+    "Freestyle"
+   ],
+   "file_names": "",
+   "era": {
+    "name": "ND",
+    "description": "NOTHING'S DIFFERENT 3"
+   },
+   "lyrics": "words of Freestyle",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 99101,
+   "name": "734",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "734"
+   ],
+   "file_names": "Juice Wrld - 734",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "session takes xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 99102,
+   "name": "734",
+   "category": "released",
+   "path": "Compilation/1. Released Discography/7. Goodbye & Good Riddance/734.mp3",
+   "track_titles": [
+    "734"
+   ],
+   "file_names": "",
+   "era": {
+    "name": "Mainstream",
+    "description": "Mainstream"
+   },
+   "lyrics": "words of 734 released",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 99103,
+   "name": "734 (v1)",
+   "category": "unreleased",
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/734 (v1).mp3",
+   "track_titles": [
+    "734 (v1)"
+   ],
+   "file_names": "",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of 734 v1",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96745,
+   "name": "Motions (with MadeInTYO)",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Motions (with MadeInTYO)"
+   ],
+   "file_names": "",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Motions session",
+   "synced_lyrics": ""
+  },
+  {
+   "id": 96780,
+   "name": "Stuck",
+   "category": "recording_session",
+   "path": "",
+   "track_titles": [
+    "Stuck",
+    "24/7",
+    "365"
+   ],
+   "file_names": "",
+   "era": {
+    "name": "GB&GR",
+    "description": "Goodbye & Good Riddance"
+   },
+   "lyrics": "words of Stuck session",
+   "synced_lyrics": ""
+  }
+ ],
+ "cases": [
+  {
+   "path": "Session Edits/7. Goodbye & Good Riddance (Sessions)/Hey Wonderland [Session Edit].mp3",
+   "song": 96134,
+   "kind": "FileName|Title",
+   "why": "a session edit takes the recording session's words"
+  },
+  {
+   "path": "Session Edits/10. Outsiders (Sessions)/Go Berserk (Strong Minds) [Session Edit].mp3",
+   "song": 96743,
+   "kind": "Loose",
+   "why": "a song's second name in front of its first"
+  },
+  {
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Slasher (v3).mp3",
+   "song": null,
+   "kind": null,
+   "why": "listed without words: another take's words are wrong"
+  },
+  {
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/Slasher (v5).mp3",
+   "song": 94682,
+   "kind": "Path",
+   "why": "listed with words"
+  },
+  {
+   "path": "Slasher (v4).mp3",
+   "song": null,
+   "kind": null,
+   "why": "names a take the API does not have words for"
+  },
+  {
+   "path": "Compilation/2. Unreleased Discography/8. WRLD ON DRUGS (Sessions)/Move The Bale (with Unhkl Flex) [v2].mp3",
+   "song": 96722,
+   "kind": "Path",
+   "why": "the words sit on the same take's session entry"
+  },
+  {
+   "path": "Compilation/1. Released Discography/7. Goodbye & Good Riddance/All Girls Are The Same.mp3",
+   "song": 96489,
+   "kind": "Path",
+   "why": "the album's own recording"
+  },
+  {
+   "path": "Compilation/1. Released Discography/23. Legends Never Die (5 Year Anniversary Edition)/Blood On My Jeans.mp3",
+   "song": 94112,
+   "kind": "FileName|Title",
+   "why": "an edition the API does not list file by file"
+  },
+  {
+   "path": "Compilation/1. Released Discography/12. Legends Never Die/Bad Energy.mp3",
+   "song": 94299,
+   "kind": "Path",
+   "why": "the same take, only listed with its extended outro"
+  },
+  {
+   "path": "Instrumentals/7. Goodbye & Good Riddance/Deprived.mp3",
+   "song": null,
+   "kind": null,
+   "why": "an instrumental has no words"
+  },
+  {
+   "path": "Remixes & Edits/Instrumental/Deprived (Instrumental).mp3",
+   "song": null,
+   "kind": null,
+   "why": "nor does one anywhere else"
+  },
+  {
+   "path": "Original Files/8. WRLD ON DRUGS (Sessions)/7_31_18 ROUGH 2.mp3",
+   "song": 94966,
+   "kind": "FileName",
+   "why": "the name the API's file list holds"
+  },
+  {
+   "path": "Original Files/7. Goodbye & Good Riddance (Sessions)/naruto.wav",
+   "song": 94636,
+   "kind": "FileName",
+   "why": "a working title from the file list, any format"
+  },
+  {
+   "path": "Music/Strong Minds.mp3",
+   "song": 95364,
+   "kind": "Title",
+   "why": "a file on disk outside any known folder"
+  },
+  {
+   "path": "Music/Never Heard Of This One.mp3",
+   "song": null,
+   "kind": null,
+   "why": "nothing similar"
+  },
+  {
+   "path": "Remixes & Edits/Live/Final Freestyle (IG Live).mp3",
+   "song": null,
+   "kind": null,
+   "why": "a word of the title is not a mix mark, and a bare 'Freestyle' names no song"
+  },
+  {
+   "path": "Session Edits/7. Goodbye & Good Riddance (Sessions)/734 [Session Edit].mp3",
+   "song": 99101,
+   "kind": "FileName|Title",
+   "fit": "SameRecording",
+   "why": "a session edit takes the session's long words, not the released song's"
+  },
+  {
+   "path": "Compilation/1. Released Discography/7. Goodbye & Good Riddance/734.mp3",
+   "song": 99102,
+   "kind": "Path",
+   "fit": "SameRecording",
+   "why": "the released song keeps its own words"
+  },
+  {
+   "path": "Compilation/2. Unreleased Discography/7. Goodbye & Good Riddance (Sessions)/734 (v1).mp3",
+   "song": 99103,
+   "kind": "Path",
+   "fit": "SameRecording",
+   "why": "an era folder called (Sessions) does not make the file a session"
+  },
+  {
+   "path": "Original Files/7. Goodbye & Good Riddance (Sessions)/734.wav",
+   "song": 99103,
+   "kind": null,
+   "fit": "SameRecording",
+   "why": "a finished file in a (Sessions) folder never takes hours of takes"
+  },
+  {
+   "path": "Studio Sessions/7. Goodbye & Good Riddance (Sessions)/734 (ProTools).zip",
+   "song": 99101,
+   "kind": null,
+   "fit": "SameRecording",
+   "why": "a session archive takes the session's words"
+  },
+  {
+   "path": "Session Edits/7. Goodbye & Good Riddance (Sessions)/Deprived [Session Edit].mp3",
+   "song": 94481,
+   "kind": "FileName|Title",
+   "fit": "OtherRecording",
+   "why": "no session words: the song's, and they are marked as such"
+  },
+  {
+   "path": "Session Edits/7. Goodbye & Good Riddance (Sessions)/Drinks In The Air (Stuck) [Session Edit].mp3",
+   "song": 96780,
+   "kind": "Loose",
+   "fit": "SameRecording",
+   "why": "the song's other name in brackets"
+  },
+  {
+   "path": "Motions + 365 (Session Edit).mp3",
+   "song": 96745,
+   "kind": "Loose",
+   "fit": "SameRecording",
+   "why": "a joined file takes both songs' session words, the song named first keeps the id"
+  },
+  {
+   "path": "JUICE UNRELEASED/MOTIONS AND 365 SESSION v2.mp3",
+   "song": 96745,
+   "kind": "Loose",
+   "fit": "SameRecording",
+   "why": "the same, by its name on disk"
+  }
+ ]
+}

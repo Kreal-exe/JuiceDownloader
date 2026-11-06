@@ -1,0 +1,152 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:v="clr-namespace:JuiceDownloader.Views"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.OverviewView">
+
+    <Grid RowDefinitions="Auto,*">
+        <TextBox Classes="search" Margin="32,6,32,12" Watermark="{loc:Str overview.search}" Text="{Binding Search.Query}" IsVisible="{Binding HasCatalog}">
+            <TextBox.InnerLeftContent>
+                <mi:MaterialIcon Kind="Magnify" Width="18" Height="18" Margin="12,0,0,0" Foreground="{DynamicResource Brush.TextMuted}" />
+            </TextBox.InnerLeftContent>
+        </TextBox>
+
+        <!-- what the search found, in the whole catalog -->
+        <Grid Grid.Row="1" RowDefinitions="Auto,*" DataContext="{Binding Search}" IsVisible="{Binding IsSearching}">
+            <Grid Margin="36,0,36,10" ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding ResultsText}" Classes="muted" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{loc:Str library.select}" Classes="caption" VerticalAlignment="Center" Margin="0,0,4,0" />
+                    <Button Classes="subtle" Content="{loc:Str library.selectAll}" Command="{Binding SelectAllCommand}" />
+                    <Button Classes="subtle" Content="{loc:Str library.selectNone}" Command="{Binding SelectNoneCommand}" />
+                </StackPanel>
+            </Grid>
+            <v:SectionView Grid.Row="1" ShowHeader="False" />
+        </Grid>
+
+    <ScrollViewer Grid.Row="1" IsVisible="{Binding !Search.IsSearching}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="26,6,26,28" MaxWidth="1320">
+
+            <v:CatalogStateView Margin="6,0" IsVisible="{Binding !HasCatalog}" />
+
+            <StackPanel IsVisible="{Binding HasCatalog}">
+                <!-- ───────── hero ───────── -->
+                <Border Classes="card" Padding="32,30" Margin="6,0" BoxShadow="0 10 30 0 #26000000">
+                    <StackPanel>
+                        <Grid ColumnDefinitions="Auto,36,*,32,Auto">
+
+                            <!-- ring: the selected share of the catalog -->
+                            <Panel Width="204" Height="204">
+                                <Ellipse Stroke="{DynamicResource Brush.Track}" StrokeThickness="14" Margin="0" />
+                                <c:RingArc StrokeThickness="14" Stroke="{DynamicResource Brush.RingGradient}" Sweep="{Binding RingAngle}">
+                                    <c:RingArc.Effect>
+                                        <DropShadowEffect BlurRadius="26" OffsetX="0" OffsetY="0" Color="#7C6CFF" Opacity="0.55" />
+                                    </c:RingArc.Effect>
+                                </c:RingArc>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <c:CounterText Bytes="{Binding RingBytes}" Part="Number" Duration="900" FontSize="42" FontWeight="Bold" />
+                                        <c:CounterText Bytes="{Binding RingBytes}" Part="Unit" Duration="900" FontSize="15" FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource Brush.TextMuted}" VerticalAlignment="Bottom" Margin="6,0,0,9" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding RingCaption}" Classes="caption" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Panel>
+
+                            <!-- summary -->
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Str overview.title}" Classes="h1" />
+                                <TextBlock Text="{loc:Str overview.catalog}" Classes="caption" Margin="0,14,0,0" />
+                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                    <c:CounterText Bytes="{Binding CatalogBytes}" Part="Number" Duration="900" FontSize="34" FontWeight="Bold" />
+                                    <c:CounterText Bytes="{Binding CatalogBytes}" Part="Unit" Duration="900" FontSize="15" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource Brush.TextMuted}" VerticalAlignment="Bottom" Margin="6,0,0,7" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding CatalogFilesText}" Classes="muted" Margin="0,2,0,0" />
+                                <TextBlock Text="{loc:Str overview.nothingSelected}" Classes="caption" TextWrapping="Wrap" Margin="0,12,0,0" IsVisible="{Binding NothingSelected}" />
+                                <TextBlock Text="{Binding SelectedLine}" Classes="caption" Margin="0,12,0,0" IsVisible="{Binding CanDownload}" />
+                            </StackPanel>
+
+                            <!-- action -->
+                            <StackPanel Grid.Column="4" VerticalAlignment="Center" Width="220">
+                                <Button Classes="primary pulse" Command="{Binding StartDownloadCommand}" IsEnabled="{Binding CanDownload}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <mi:MaterialIcon Kind="TrayArrowDown" Width="18" Height="18" />
+                                        <TextBlock Text="{Binding DownloadText}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- where it goes -->
+                        <Border CornerRadius="14" Background="{DynamicResource Brush.Inset}" Padding="16,6,8,6" Margin="0,22,0,0">
+                            <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+                                <mi:MaterialIcon Kind="FolderDownloadOutline" Width="17" Height="17" Foreground="{DynamicResource Brush.TextMuted}" />
+                                <TextBlock Grid.Column="1" Text="{loc:Str overview.folder}" Classes="caption" VerticalAlignment="Center" Margin="10,0,12,0" />
+                                <TextBlock Grid.Column="2" Text="{Binding Settings.Destination}" FontSize="13" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                           ToolTip.Tip="{Binding Settings.Destination}" />
+                                <Button Grid.Column="3" Classes="subtle" Content="{loc:Str overview.change}" Command="{Binding ChangeFolderCommand}" Margin="12,0,0,0" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ───────── sections ───────── -->
+                <Grid Margin="10,26,10,10" ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{loc:Str overview.sections}" Classes="h2" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Text="{loc:Str library.select}" Classes="caption" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <Button Classes="subtle" Content="{loc:Str library.selectAll}" Command="{Binding SelectAllCommand}" />
+                        <Button Classes="subtle" Content="{loc:Str library.selectNone}" Command="{Binding SelectNoneCommand}" />
+                    </StackPanel>
+                </Grid>
+                <c:SegmentBar ItemsSource="{Binding Sections}" Total="{Binding CatalogBytes}" Track="{DynamicResource Brush.Track}" Height="8" Margin="10,0,10,14" IsVisible="{Binding CanDownload}" />
+
+                <Border Classes="card" Margin="6,0,6,10" Padding="18,14" CornerRadius="16">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <CheckBox Classes="check" IsChecked="{Binding UnreleasedState, Mode=OneWay}" Command="{Binding ToggleUnreleasedCommand}" Margin="0,0,16,0" />
+                        <StackPanel Grid.Column="1" Margin="0,0,16,0" VerticalAlignment="Center">
+                            <TextBlock Text="{loc:Str overview.allUnreleased}" FontSize="14.5" FontWeight="SemiBold" />
+                            <TextBlock Text="{loc:Str overview.allUnreleased.desc}" Classes="muted" FontSize="12.5" TextWrapping="Wrap" Margin="0,3,0,0" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="{Binding UnreleasedSize}" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <ItemsControl ItemsSource="{Binding Sections}" Margin="6,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Panel Classes="rise" Margin="0,0,0,10">
+                                <Button Classes="cardButton flat" Command="{Binding $parent[UserControl].DataContext.OpenSectionCommand}" CommandParameter="{Binding}">
+                                    <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+                                        <CheckBox Classes="check" IsChecked="{Binding IsChecked, Mode=OneWay}" Command="{Binding ToggleAllCommand}"
+                                                  IsEnabled="{Binding HasFiles}" Margin="0,0,16,0" />
+                                        <Border Grid.Column="1" Classes="tile" Width="38" Height="38" CornerRadius="11" Background="{Binding SoftBrush}">
+                                            <mi:MaterialIcon Kind="{Binding Glyph}" Width="18" Height="18" Foreground="{Binding Brush}" />
+                                        </Border>
+                                        <StackPanel Grid.Column="2" Margin="14,0,16,0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Title}" FontSize="14.5" FontWeight="SemiBold" />
+                                            <TextBlock Text="{Binding Description}" Classes="muted" FontSize="12.5" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="3" VerticalAlignment="Center" MinWidth="96">
+                                            <TextBlock Text="{Binding SizeText}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                                            <TextBlock Text="{Binding FilesText}" Classes="caption" HorizontalAlignment="Right" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button>
+                            </Panel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <StackPanel Margin="10,6,10,0" Spacing="4">
+                    <TextBlock Text="{Binding UpdatedText}" Classes="caption" />
+                    <TextBlock Text="{loc:Str catalog.offline}" Classes="caption" Foreground="{DynamicResource Brush.Warning}" IsVisible="{Binding IsOffline}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+    </Grid>
+</UserControl>
