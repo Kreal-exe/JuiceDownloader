@@ -1,0 +1,533 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:c="clr-namespace:JuiceDownloader.Controls">
+
+    <!-- The look of the Windows app (src/JuiceDownloader/Themes/Styles.xaml) as Avalonia style classes. -->
+
+    <!-- ───────────── text ───────────── -->
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+    <Style Selector="TextBlock.muted">
+        <Setter Property="FontSize" Value="13.5" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+    </Style>
+    <Style Selector="TextBlock.caption">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextFaint}" />
+    </Style>
+
+    <!-- ───────────── surfaces ───────────── -->
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="24" />
+    </Style>
+    <Style Selector="Border.pill">
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="9,3" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.tile">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.tile > mi|MaterialIcon">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- A whole card that is clickable (a section, a top-level row): a Button with the card look. -->
+    <Style Selector="Button.cardButton">
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="20,18" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+        <Setter Property="RenderTransform" Value="translateY(0px)" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.22" Easing="CubicEaseOut" />
+                <BrushTransition Property="Background" Duration="0:0:0.18" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"
+                        BoxShadow="0 8 24 0 #22000000">
+                    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.cardButton:not(.listed):pointerover, Button.cardButton.listed.hot">
+        <Setter Property="Background" Value="{DynamicResource Brush.CardHover}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorderHover}" />
+    </Style>
+    <Style Selector="Grid.motion Button.cardButton.lift:pointerover">
+        <Setter Property="RenderTransform" Value="translateY(-4px)" />
+    </Style>
+    <Style Selector="Button.cardButton.flat">
+        <Setter Property="RenderTransform" Value="none" />
+        <Setter Property="Padding" Value="18,14" />
+        <Setter Property="CornerRadius" Value="16" />
+    </Style>
+
+    <!-- A plain clickable row (what is nested in a section's list) with only a hover tint; its right edge lines up with the cards'. -->
+    <Style Selector="Button.row">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="10,7,19,7" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.row.hot">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+    </Style>
+
+    <!-- a settings line -->
+    <Style Selector="c|SettingRow">
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Divider}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0,14">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Border Classes="tile" Width="36" Height="36" CornerRadius="10" Background="{DynamicResource Brush.Inset}" VerticalAlignment="Center">
+                            <mi:MaterialIcon Kind="{TemplateBinding Glyph, Converter={x:Static c:IconConverter.Instance}}" Width="18" Height="18"
+                                             Foreground="{DynamicResource Brush.TextMuted}" />
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="14,0,20,0" VerticalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text}" />
+                            <TextBlock Text="{TemplateBinding Description}" Classes="muted" FontSize="12.5" TextWrapping="Wrap" Margin="0,2,0,0" />
+                        </StackPanel>
+                        <ContentPresenter Grid.Column="2" Content="{TemplateBinding Content}" VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- a virtualized list of rows: the list only scrolls, the rows draw themselves -->
+    <Style Selector="ListBox.rows">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    </Style>
+    <Style Selector="ListBox.rows > ListBoxItem">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="TextBlock.rowName">
+        <Setter Property="FontSize" Value="13.5" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!-- the row "Show in its folder" came to -->
+    <Style Selector="Button.listed.flash, Button.cardButton.listed.flash">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentSoft}" />
+    </Style>
+    <Style Selector="TextBlock.rowName.playing">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Accent}" />
+    </Style>
+    <Style Selector="TextBlock.found">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Success}" />
+    </Style>
+    <!-- a row's play button: there while the pointer is on the row, and always on the track in the player -->
+    <Style Selector="Button.roundPlay">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentGradient}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextOnAccent}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" CornerRadius="999">
+                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.rowPlay">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="Button.hot Button.rowPlay.playable, Button.rowPlay.current">
+        <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Slider.player">
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.rowName.top">
+        <Setter Property="FontSize" Value="14.5" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <!-- ───────────── buttons ───────────── -->
+    <Style Selector="Button.primary, Button.danger, Button.ghost, Button.subtle, Button.icon, Button.nav, Button.chip">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.primary:pressed, Button.danger:pressed, Button.ghost:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.97)" />
+    </Style>
+
+    <Style Selector="Button.primary, Button.danger">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentGradient}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextOnAccent}" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="22,14" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+    <Style Selector="Button.primary /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="0 8 24 0 #557C6CFF" />
+    </Style>
+    <Style Selector="Button.danger">
+        <Setter Property="Background" Value="{DynamicResource Brush.DangerGradient}" />
+    </Style>
+    <Style Selector="Button.danger /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="0 8 24 0 #55F43F5E" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ Border#PART_Border, Button.danger:pointerover /template/ Border#PART_Border">
+        <Setter Property="Opacity" Value="0.92" />
+    </Style>
+    <Style Selector="Button.primary:disabled /template/ Border#PART_Border, Button.danger:disabled /template/ Border#PART_Border">
+        <Setter Property="Opacity" Value="0.4" />
+        <Setter Property="BoxShadow" Value="0 0 0 0 Transparent" />
+    </Style>
+    <Style Selector="Button.success">
+        <Setter Property="Background" Value="{DynamicResource Brush.SuccessGradient}" />
+    </Style>
+
+    <Style Selector="Button.ghost">
+        <Setter Property="Background" Value="{DynamicResource Brush.Inset}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Button.ghost:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorderHover}" />
+    </Style>
+    <Style Selector="Button.ghost:disabled">
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <Style Selector="Button.subtle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Button.subtle:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+
+    <Style Selector="Button.icon">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+        <Setter Property="Width" Value="34" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="Button.icon:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+
+    <!-- sidebar navigation -->
+    <Style Selector="Button.nav">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Margin" Value="12,2" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style Selector="Button.nav:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+    <Style Selector="Button.nav.active">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentSoft}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+
+    <!-- filter chips -->
+    <Style Selector="Button.chip">
+        <Setter Property="Background" Value="{DynamicResource Brush.Inset}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.CardBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="14,7" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Button.chip:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Brush.Hover}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+    <Style Selector="Button.chip.active">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentSoft}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+    </Style>
+
+    <!-- ───────────── check box and switch ───────────── -->
+    <Style Selector="CheckBox.check">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="box" Width="22" Height="22" CornerRadius="7" Background="{DynamicResource Brush.Inset}"
+                        BorderBrush="{DynamicResource Brush.InputBorder}" BorderThickness="1.5">
+                    <Border.Transitions>
+                        <Transitions>
+                            <BrushTransition Property="Background" Duration="0:0:0.15" />
+                        </Transitions>
+                    </Border.Transitions>
+                    <Panel>
+                        <mi:MaterialIcon Name="mark" Kind="CheckBold" Width="14" Height="14" Foreground="White" Opacity="0"
+                                         RenderTransformOrigin="50%,50%" RenderTransform="scale(0.4)">
+                            <mi:MaterialIcon.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="BackEaseOut" />
+                                </Transitions>
+                            </mi:MaterialIcon.Transitions>
+                        </mi:MaterialIcon>
+                        <Border Name="dash" Width="10" Height="2.5" CornerRadius="1.25" Background="White" Opacity="0"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="CheckBox.check:checked /template/ Border#box">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentGradient}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="CheckBox.check:checked /template/ mi|MaterialIcon#mark">
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="RenderTransform" Value="scale(1)" />
+    </Style>
+    <!-- part of what the row stands for is selected -->
+    <Style Selector="CheckBox.check:indeterminate /template/ Border#box">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentGradient}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="CheckBox.check:indeterminate /template/ Border#dash">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="CheckBox.check:disabled">
+        <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <Style Selector="CheckBox.toggle">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="track" Width="46" Height="26" CornerRadius="13" Background="{DynamicResource Brush.Track}"
+                        BorderBrush="{DynamicResource Brush.InputBorder}" BorderThickness="1">
+                    <Border Name="knob" Width="18" Height="18" CornerRadius="9" Background="{DynamicResource Brush.Knob}"
+                            HorizontalAlignment="Left" Margin="3,0,0,0" BoxShadow="0 1 4 0 #40000000"
+                            RenderTransform="translateX(0px)">
+                        <Border.Transitions>
+                            <Transitions>
+                                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="CheckBox.toggle:checked /template/ Border#track">
+        <Setter Property="Background" Value="{DynamicResource Brush.AccentGradient}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="CheckBox.toggle:checked /template/ Border#knob">
+        <Setter Property="RenderTransform" Value="translateX(20px)" />
+    </Style>
+    <Style Selector="CheckBox.toggle:disabled">
+        <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <!-- ───────────── inputs ───────────── -->
+    <Style Selector="TextBox.search">
+        <Setter Property="Background" Value="{DynamicResource Brush.Input}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.InputBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="14,10" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBox.search:pointerover /template/ Border#PART_BorderElement, TextBox.search:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource Brush.Input}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+    </Style>
+    <Style Selector="ComboBox.combo">
+        <Setter Property="MinWidth" Value="220" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Input}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.InputBorder}" />
+    </Style>
+
+    <!-- ───────────── motion (the "Animations" setting puts .motion on the window's root) ───────────── -->
+    <Style Selector="Grid.motion :is(UserControl).page[IsVisible=True]">
+        <Style.Animations>
+            <Animation Duration="0:0:0.32" Easing="CubicEaseOut" FillMode="Backward">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="TranslateTransform.Y" Value="14" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="TranslateTransform.Y" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="Grid.motion Border.sheet">
+        <Style.Animations>
+            <Animation Duration="0:0:0.34" Easing="BackEaseOut" FillMode="Backward">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.94" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.94" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="Grid.motion :is(Control).rise[IsVisible=True]">
+        <Style.Animations>
+            <Animation Duration="0:0:0.4" Easing="CubicEaseOut" FillMode="Backward">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="TranslateTransform.Y" Value="16" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="TranslateTransform.Y" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="Grid.motion Ellipse.blob1">
+        <Style.Animations>
+            <Animation Duration="0:0:18" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0" /><Setter Property="TranslateTransform.Y" Value="0" /></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="90" /><Setter Property="TranslateTransform.Y" Value="60" /></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="Grid.motion Ellipse.blob2">
+        <Style.Animations>
+            <Animation Duration="0:0:22" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0" /><Setter Property="TranslateTransform.Y" Value="0" /></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="-80" /><Setter Property="TranslateTransform.Y" Value="70" /></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="Grid.motion Ellipse.blob3">
+        <Style.Animations>
+            <Animation Duration="0:0:26" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0" /><Setter Property="TranslateTransform.Y" Value="0" /></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="-70" /><Setter Property="TranslateTransform.Y" Value="-60" /></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <!-- the download button breathes while there is something to download -->
+    <Style Selector="Grid.motion Button.primary.pulse:not(:disabled) /template/ Border#PART_Border">
+        <Style.Animations>
+            <Animation Duration="0:0:1.6" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="BoxShadow" Value="0 8 20 0 #407C6CFF" /></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="BoxShadow" Value="0 10 34 4 #807C6CFF" /></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+</Styles>

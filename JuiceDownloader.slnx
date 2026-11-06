@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/JuiceDownloader/JuiceDownloader.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/JuiceDownloader.Core.Tests/JuiceDownloader.Core.Tests.csproj" />
+    <Project Path="tests/JuiceDownloader.Tests/JuiceDownloader.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,101 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.LyricsView">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32,6,32,28" MaxWidth="960" HorizontalAlignment="Left">
+            <TextBlock Text="{loc:Str lyrics.title}" Classes="h1" />
+            <TextBlock Text="{loc:Str lyrics.subtitle}" Classes="muted" Margin="0,4,0,0" TextWrapping="Wrap" />
+
+            <Border Classes="card rise" Margin="0,20,0,0" Padding="24,10,24,10">
+                <StackPanel>
+                    <c:SettingRow Glyph="TextBoxOutline" Title="{loc:Str lyrics.enable}" Description="{loc:Str lyrics.enable.desc}">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="TagTextOutline" Title="{loc:Str lyrics.embed}" Description="{loc:Str lyrics.embed.desc}">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Embed}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="FileDocumentOutline" Title="{loc:Str lyrics.sidecar}" Description="{loc:Str lyrics.sidecar.desc}">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Sidecar}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="ClockOutline" Title="{loc:Str lyrics.timed}" Description="{loc:Str lyrics.timed.desc}" BorderThickness="0">
+                        <CheckBox Classes="toggle" IsChecked="{Binding TimedInTag}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <!-- what is known -->
+            <Border Classes="card rise" Margin="0,16,0,0" Padding="24,16">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel VerticalAlignment="Center">
+                        <Panel>
+                            <TextBlock Text="{Binding StatsText}" FontSize="14" FontWeight="SemiBold" IsVisible="{Binding !IsLoading}" />
+                            <StackPanel Orientation="Horizontal" Spacing="10" IsVisible="{Binding IsLoading}">
+                                <c:RingArc Width="15" Height="15" StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsLoading}" />
+                                <TextBlock Text="{Binding LoadingText}" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Panel>
+                        <TextBlock Text="{Binding UpdatedText}" Classes="caption" Margin="0,3,0,0" />
+                        <TextBlock Text="{Binding Failure}" Classes="caption" Foreground="{DynamicResource Brush.Warning}" TextWrapping="Wrap" Margin="0,3,0,0" IsVisible="{Binding HasFailure}" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Classes="ghost" Command="{Binding UpdateLyricsCommand}" IsEnabled="{Binding !IsLoading}" VerticalAlignment="Center" Margin="16,0,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <mi:MaterialIcon Kind="Refresh" Width="15" Height="15" />
+                            <TextBlock Text="{loc:Str lyrics.update}" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- a folder of music -->
+            <Border Classes="card rise" Margin="0,16,0,0" Padding="24,18,24,20">
+                <StackPanel>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel>
+                            <TextBlock Text="{loc:Str lyrics.folder}" Classes="h2" />
+                            <TextBlock Text="{loc:Str lyrics.folder.desc}" Classes="muted" FontSize="12.5" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Panel Grid.Column="1" VerticalAlignment="Top" Margin="16,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding !IsFolderRunning}">
+                                <Button Classes="ghost" Command="{Binding AddToDownloadFolderCommand}">
+                                    <TextBlock Text="{loc:Str lyrics.folder.mine}" />
+                                </Button>
+                                <Button Classes="ghost" Command="{Binding ChooseFolderCommand}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <mi:MaterialIcon Kind="FolderOpenOutline" Width="15" Height="15" />
+                                        <TextBlock Text="{loc:Str lyrics.folder.choose}" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <Button Classes="ghost" Command="{Binding StopFolderCommand}" IsVisible="{Binding IsFolderRunning}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <mi:MaterialIcon Kind="Stop" Width="15" Height="15" />
+                                    <TextBlock Text="{loc:Str download.stop}" />
+                                </StackPanel>
+                            </Button>
+                        </Panel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,14,0,0" IsVisible="{Binding IsFolderRunning}">
+                        <c:RingArc Width="15" Height="15" StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsFolderRunning}" />
+                        <TextBlock Text="{Binding FolderRunningText}" Classes="muted" FontSize="12.5" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding FolderSummary}" FontSize="13.5" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,14,0,0" IsVisible="{Binding HasFolderSummary}" />
+                    <StackPanel IsVisible="{Binding HasMissing}" Margin="0,12,0,0">
+                        <TextBlock Text="{loc:Str lyrics.folder.missing}" Classes="caption" FontWeight="SemiBold" Margin="0,0,0,6" />
+                        <Border CornerRadius="12" Background="{DynamicResource Brush.Inset}" Padding="12,8">
+                            <ListBox Classes="rows" MaxHeight="220" ItemsSource="{Binding Missing}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" FontSize="12.5" Margin="0,2" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

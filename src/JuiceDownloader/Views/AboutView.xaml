@@ -1,0 +1,86 @@
+<UserControl x:Class="JuiceDownloader.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:v="clr-namespace:JuiceDownloader.Views"
+             xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32,6,32,28" MaxWidth="820">
+
+            <Border Style="{StaticResource Card}" Padding="30,28" c:Entrance.Delay="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="84" Height="84" VerticalAlignment="Top">
+                        <Border CornerRadius="24" Background="{DynamicResource Brush.AccentGradient}" Opacity="0.55" Margin="4,10,4,-2">
+                            <Border.Effect>
+                                <BlurEffect Radius="28" />
+                            </Border.Effect>
+                        </Border>
+                        <v:Logo Width="84" Height="84" />
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="26,0,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{loc:Str app.name}" FontFamily="{StaticResource Font.Display}" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" />
+                            <Border Style="{StaticResource Pill}" Background="{DynamicResource Brush.AccentSoft}" VerticalAlignment="Center" Margin="12,0,0,0" Padding="12,4">
+                                <TextBlock Text="{Binding Version, Converter={StaticResource LocFormat}, ConverterParameter=about.version}" FontSize="12" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource Brush.Accent}" />
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="{loc:Str app.tagline}" FontSize="14" FontWeight="Medium" Margin="0,8,0,0" />
+                        <TextBlock Text="{loc:Str about.description}" Style="{StaticResource Muted}" TextWrapping="Wrap" LineHeight="21" Margin="0,8,0,0" />
+                        <WrapPanel Margin="-6,10,0,0">
+                            <Button Style="{StaticResource PrimaryButton}" Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/Kreal-exe/JuiceDownloader" Margin="6">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE774;" Style="{StaticResource Glyph}" FontSize="14" Foreground="{DynamicResource Brush.TextOnAccent}" />
+                                    <TextBlock Text="{loc:Str about.github}" Margin="10,0,0,0" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:Str about.issues}" Command="{Binding OpenUrlCommand}"
+                                    CommandParameter="https://github.com/Kreal-exe/JuiceDownloader/issues" Margin="6" Padding="18,12" />
+                        </WrapPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0" Padding="24,18,24,10" c:Entrance.Delay="80">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str about.catalog}" Style="{StaticResource H2}" Margin="0,0,0,4" />
+                    <c:SettingRow Glyph="&#xEC4F;" Title="{loc:Str about.catalog.files}" Description="{Binding CatalogLine}" />
+                    <c:SettingRow Glyph="&#xE8D2;" Title="{loc:Str lyrics.title}" Description="{Binding Lyrics.StatusText}" BorderThickness="0" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0" Padding="24,18,24,10" c:Entrance.Delay="140">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str about.files}" Style="{StaticResource H2}" Margin="0,0,0,4" />
+                    <c:SettingRow Glyph="&#xE8B7;" Title="{loc:Str settings.folder}" Description="{Binding Settings.Destination}">
+                        <Button Style="{StaticResource GhostButton}" Content="{loc:Str about.open}" Command="{Binding OpenFolderCommand}" CommandParameter="{Binding Settings.Destination}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE713;" Title="{loc:Str about.files.data}" Description="{Binding SettingsFolder}" BorderThickness="0">
+                        <Button Style="{StaticResource GhostButton}" Content="{loc:Str about.open}" Command="{Binding OpenFolderCommand}" CommandParameter="{Binding SettingsFolder}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0" Padding="24,18,24,10" c:Entrance.Delay="200">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str about.sources}" Style="{StaticResource H2}" Margin="0,0,0,4" />
+                    <c:SettingRow Glyph="&#xEC4F;" Title="{loc:Str about.source}" Description="{loc:Str about.source.desc}">
+                        <Button Style="{StaticResource GhostButton}" Content="{loc:Str about.source.open}" Command="{Binding OpenUrlCommand}" CommandParameter="https://juicewrldapi.com" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE774;" Title="{loc:Str about.web}" Description="{loc:Str about.web.desc}" BorderThickness="0" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="{loc:Str about.footer}" Style="{StaticResource Caption}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,18,0,0" c:Entrance.Delay="260" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

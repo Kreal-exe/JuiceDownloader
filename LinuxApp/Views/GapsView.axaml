@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.GapsView">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Margin="32,6,32,14">
+            <TextBlock Text="{loc:Str gaps.title}" Classes="h1" />
+            <TextBlock Text="{loc:Str gaps.subtitle}" Classes="muted" Margin="0,4,0,0" TextWrapping="Wrap" />
+
+            <!-- the folder -->
+            <Border Classes="card" Margin="0,18,0,0" Padding="20,14">
+                <StackPanel>
+                    <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto">
+                        <mi:MaterialIcon Kind="FolderSearchOutline" Width="18" Height="18" Foreground="{DynamicResource Brush.TextMuted}" />
+                        <TextBlock Grid.Column="1" Text="{loc:Str gaps.folder}" Classes="caption" VerticalAlignment="Center" Margin="10,0,12,0" />
+                        <TextBlock Grid.Column="2" Text="{Binding Folder}" FontSize="13" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Folder}" />
+                        <Button Grid.Column="3" Classes="subtle" Content="{loc:Str overview.change}" Command="{Binding ChangeFolderCommand}" IsEnabled="{Binding IsIdle}" Margin="12,0" />
+                        <Button Grid.Column="4" Classes="primary" Padding="18,10" FontSize="14" Content="{loc:Str gaps.scan}" Command="{Binding ScanCommand}" IsEnabled="{Binding IsIdle}" />
+                    </Grid>
+                    <TextBlock Text="{loc:Str gaps.notEnabled}" Classes="caption" TextWrapping="Wrap" Margin="0,10,0,0" />
+                </StackPanel>
+            </Border>
+
+            <!-- how it stands -->
+            <Grid ColumnDefinitions="*,Auto" Margin="4,14,0,0" IsVisible="{Binding IsScanning}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <c:RingArc Width="15" Height="15" StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsScanning}" />
+                    <TextBlock Text="{Binding ScanningText}" Classes="muted" VerticalAlignment="Center" />
+                </StackPanel>
+                <Button Grid.Column="1" Classes="ghost" Content="{loc:Str gaps.stop}" Command="{Binding StopCommand}" />
+            </Grid>
+            <TextBlock Text="{Binding Failure}" Classes="caption" Foreground="{DynamicResource Brush.Warning}" TextWrapping="Wrap" Margin="4,12,0,0" IsVisible="{Binding HasFailure}" />
+            <TextBlock Text="{Binding SummaryText}" FontSize="14" FontWeight="SemiBold" Margin="4,14,0,0" IsVisible="{Binding HasScan}" />
+            <TextBlock Text="{loc:Str gaps.empty}" Classes="muted" Margin="4,6,0,0" IsVisible="{Binding IsClean}" />
+
+            <!-- the web -->
+            <Grid ColumnDefinitions="*,Auto" Margin="4,14,0,0" IsVisible="{Binding HasGaps}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="{loc:Str gaps.search.desc}" Classes="muted" FontSize="12.5" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,6,0,0" IsVisible="{Binding IsSearching}">
+                        <c:RingArc Width="15" Height="15" StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsSearching}" />
+                        <TextBlock Text="{Binding SearchingText}" Classes="caption" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding ResultText}" FontSize="13" FontWeight="SemiBold" Margin="0,6,0,0" IsVisible="{Binding HasResult}" />
+                </StackPanel>
+                <Panel Grid.Column="1" VerticalAlignment="Center">
+                    <Button Classes="primary" Padding="18,10" FontSize="14" Command="{Binding SearchCommand}" IsVisible="{Binding !IsSearching}" IsEnabled="{Binding CanSearch}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <mi:MaterialIcon Kind="Web" Width="16" Height="16" />
+                            <TextBlock Text="{loc:Str gaps.search}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="ghost" Content="{loc:Str gaps.stop}" Command="{Binding StopCommand}" IsVisible="{Binding IsSearching}" />
+                </Panel>
+            </Grid>
+        </StackPanel>
+
+        <!-- only what is on screen exists as controls -->
+        <ListBox Grid.Row="1" Classes="rows" Padding="32,2,32,28" ItemsSource="{Binding Gaps}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Classes="card" Padding="16,10" CornerRadius="14" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                                <TextBlock Text="{Binding Name}" Classes="rowName" ToolTip.Tip="{Binding Name}" />
+                                <TextBlock Text="{Binding Folder}" Classes="caption" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" />
+                                <TextBlock Text="{Binding State}" Classes="caption" Classes.found="{Binding IsFound}" TextTrimming="CharacterEllipsis" Margin="0,3,0,0"
+                                           ToolTip.Tip="{Binding State}" IsVisible="{Binding HasState}" />
+                            </StackPanel>
+                            <Border Grid.Column="1" Classes="pill" Background="{DynamicResource Brush.Inset}" MaxWidth="280">
+                                <TextBlock Text="{Binding KindText}" FontSize="11.5" FontWeight="SemiBold" Foreground="{DynamicResource Brush.TextMuted}" TextTrimming="CharacterEllipsis" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

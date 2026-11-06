@@ -1,0 +1,91 @@
+<UserControl x:Class="JuiceDownloader.Views.LyricsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:LyricsViewModel}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32,6,32,28" MaxWidth="960" HorizontalAlignment="Left">
+            <TextBlock Text="{loc:Str lyrics.title}" Style="{StaticResource H1}" c:Entrance.Delay="0" />
+            <TextBlock Text="{loc:Str lyrics.subtitle}" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,4,0,0" c:Entrance.Delay="0" />
+
+            <!-- the add-on -->
+            <Border Style="{StaticResource Card}" Margin="0,20,0,0" Padding="24,10,24,10" c:Entrance.Delay="60">
+                <StackPanel>
+                    <c:SettingRow Glyph="&#xE8BD;" Title="{loc:Str lyrics.enable}" Description="{loc:Str lyrics.enable.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE8D6;" Title="{loc:Str lyrics.embed}" Description="{loc:Str lyrics.embed.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Embed}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE8A5;" Title="{loc:Str lyrics.sidecar}" Description="{loc:Str lyrics.sidecar.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Sidecar}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE823;" Title="{loc:Str lyrics.timed}" Description="{loc:Str lyrics.timed.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Timed}" IsEnabled="{Binding Enabled}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="&#xE72C;" Title="{Binding StatusText}" Description="{Binding UpdatedText}" BorderThickness="0">
+                        <Button Style="{StaticResource GhostButton}" Content="{loc:Str lyrics.update}" Command="{Binding UpdateCommand}" />
+                    </c:SettingRow>
+                    <TextBlock Text="{Binding ErrorText}" Style="{StaticResource Caption}" Foreground="{DynamicResource Brush.Danger}" TextWrapping="Wrap" Margin="0,0,0,10"
+                               Visibility="{Binding ErrorText, Converter={StaticResource NullToVis}}" />
+                </StackPanel>
+            </Border>
+
+            <!-- a folder of the user's own -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="24,18,24,20" c:Entrance.Delay="120">
+                <StackPanel>
+                    <Grid>
+                        <StackPanel Margin="0,0,180,0">
+                            <TextBlock Text="{loc:Str lyrics.folder}" Style="{StaticResource H2}" />
+                            <TextBlock Text="{loc:Str lyrics.folder.desc}" Style="{StaticResource Muted}" FontSize="12.5" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                    Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisInverse}}">
+                            <Button Style="{StaticResource GhostButton}" Command="{Binding AddToDownloadFolderCommand}" Margin="0,0,8,0">
+                                <TextBlock Text="{loc:Str lyrics.folder.mine}" />
+                            </Button>
+                            <Button Style="{StaticResource GhostButton}" Command="{Binding ChooseFolderCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE8B7;" Style="{StaticResource Glyph}" FontSize="12" />
+                                    <TextBlock Text="{loc:Str lyrics.folder.choose}" Margin="8,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <Button Style="{StaticResource GhostButton}" Command="{Binding StopCommand}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE71A;" Style="{StaticResource Glyph}" FontSize="12" />
+                                <TextBlock Text="{loc:Str download.stop}" Margin="8,0,0,0" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0" Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}">
+                        <c:Arc StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" StartAngle="0" EndAngle="270" Width="14" Height="14"
+                               StrokeStartLineCap="Round" StrokeEndLineCap="Round" c:Spin.IsActive="{Binding IsRunning}" />
+                        <TextBlock Text="{Binding RunningText}" Style="{StaticResource Caption}" Margin="10,0,0,0" VerticalAlignment="Center" MaxWidth="760" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding SummaryText}" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,14,0,0"
+                               Visibility="{Binding SummaryText, Converter={StaticResource NullToVis}}" />
+
+                    <StackPanel Margin="0,14,0,0" Visibility="{Binding HasMissing, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{loc:Str lyrics.folder.missing}" Style="{StaticResource Caption}" FontWeight="SemiBold" />
+                        <ListBox Style="{StaticResource PlainList}" ItemsSource="{Binding Missing}" MaxHeight="240" Margin="0,6,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Style="{StaticResource Caption}" Margin="0,2" TextTrimming="CharacterEllipsis" ToolTip="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

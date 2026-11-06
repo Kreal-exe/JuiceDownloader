@@ -1,0 +1,132 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.RulesView">
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Margin="32,6,32,10">
+            <TextBlock Text="{loc:Str rules.title}" Classes="h1" />
+            <TextBlock Text="{loc:Str rules.subtitle}" Classes="muted" Margin="0,4,0,0" TextWrapping="Wrap" />
+
+            <Border Classes="card" Margin="0,14,0,0" Padding="20,14,20,6">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str rules.preset}" FontSize="15" FontWeight="SemiBold" />
+                    <TextBlock Text="{loc:Str rules.preset.desc}" Classes="muted" FontSize="12.5" TextWrapping="Wrap" Margin="0,3,0,0" />
+                    <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,10,0,0">
+                        <Button Classes="subtle" Content="{loc:Str rules.quick.unreleased}" Command="{Binding QuickUnreleasedCommand}" />
+                        <Button Classes="subtle" Content="{loc:Str rules.quick.released}" Command="{Binding QuickReleasedCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{loc:Str rules.from}" Classes="caption" FontWeight="SemiBold" Margin="0,10,0,6" />
+                    <ItemsControl ItemsSource="{Binding Sections}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Classes="chip" Classes.active="{Binding IsOn}" Padding="11,5" FontSize="12.5" Margin="0,0,6,6" Content="{Binding Title}" Command="{Binding ToggleCommand}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <UniformGrid Columns="2">
+                        <c:SettingRow Glyph="Numeric1BoxOutline" Margin="0,0,14,0" Title="{loc:Str rules.oneVersion}" Description="{loc:Str rules.oneVersion.desc}">
+                            <CheckBox Classes="toggle" IsChecked="{Binding OneVersion}" />
+                        </c:SettingRow>
+                        <c:SettingRow Glyph="Album" Margin="14,0,0,0" Title="{loc:Str rules.skipReleased}" Description="{loc:Str rules.skipReleased.desc}">
+                            <CheckBox Classes="toggle" IsChecked="{Binding SkipReleased}" />
+                        </c:SettingRow>
+                        <c:SettingRow Glyph="ProgressClock" Margin="0,0,14,0" Title="{loc:Str rules.skipUnfinished}" Description="{loc:Str rules.skipUnfinished.desc}">
+                            <CheckBox Classes="toggle" IsChecked="{Binding SkipUnfinished}" />
+                        </c:SettingRow>
+                        <c:SettingRow Glyph="Broadcast" Margin="14,0,0,0" Title="{loc:Str rules.withClips}" Description="{loc:Str rules.withClips.desc}">
+                            <CheckBox Classes="toggle" IsChecked="{Binding WithClips}" />
+                        </c:SettingRow>
+                        <c:SettingRow Glyph="FolderOutline" Margin="0,0,14,0" BorderThickness="0" Title="{loc:Str rules.oneFolder}" Description="{Binding OneFolderText}">
+                            <CheckBox Classes="toggle" IsChecked="{Binding OneFolder}" />
+                        </c:SettingRow>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <Grid ColumnDefinitions="*,Auto" Margin="4,12,0,0">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="10" IsVisible="{Binding IsLoading}">
+                        <c:RingArc Width="15" Height="15" StrokeThickness="2" Stroke="{DynamicResource Brush.Accent}" IsSpinning="{Binding IsLoading}" />
+                        <TextBlock Text="{loc:Str rules.loading}" Classes="muted" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding Failure}" Classes="caption" Foreground="{DynamicResource Brush.Warning}" TextWrapping="Wrap" IsVisible="{Binding HasFailure}" />
+                    <TextBlock Text="{Binding SummaryText}" FontSize="14" FontWeight="SemiBold" IsVisible="{Binding HasResult}" />
+                    <TextBlock Text="{Binding SkippedText}" Classes="caption" Margin="0,2,0,0" TextWrapping="Wrap" IsVisible="{Binding HasResult}" />
+                </StackPanel>
+                <Button x:Name="DownloadButton" Grid.Column="1" Classes="primary" Padding="18,10" FontSize="14" Margin="16,0,0,0" Command="{Binding DownloadCommand}" IsEnabled="{Binding CanDownload}" VerticalAlignment="Center"
+                        PointerEntered="OnDownloadEnter" PointerExited="OnDownloadExit" Click="OnDownloadClick">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <mi:MaterialIcon Kind="TrayArrowDown" Width="16" Height="16" />
+                        <TextBlock Text="{Binding DownloadText}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Popup x:Name="DownloadPopup" Grid.Column="1" PlacementTarget="{Binding #DownloadButton}" Placement="Bottom" VerticalOffset="6" IsLightDismissEnabled="False">
+                    <Border x:Name="DownloadPopupCard" Width="360" Background="{DynamicResource Brush.Popup}" BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1" CornerRadius="12" Padding="14" PointerExited="OnDownloadExit">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding DownloadListTitle}" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text}" Margin="0,0,0,10" />
+                            <ScrollViewer MaxHeight="340" VerticalScrollBarVisibility="Auto">
+                                <TextBlock Text="{Binding DownloadList}" TextWrapping="Wrap" LineHeight="20" Foreground="{DynamicResource Brush.TextMuted}" />
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Popup>
+            </Grid>
+        </StackPanel>
+
+        <ListBox x:Name="List" Grid.Row="1" Classes="rows" Padding="32,2,32,20" ItemsSource="{Binding Rows}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Panel Margin="{Binding Indent}">
+                        <Button Classes="listed" Classes.cardButton="{Binding IsTop}" Classes.flat="{Binding IsTop}" Classes.row="{Binding !IsTop}"
+                                HorizontalAlignment="Stretch" Command="{Binding ClickCommand}" ContextRequested="OnRowContext">
+                            <Grid ColumnDefinitions="Auto,*,Auto,40,40,Auto,40">
+                                <Border Classes="tile" Width="34" Height="34" CornerRadius="10" Margin="0,0,12,0" IsVisible="{Binding IsSong}" Background="{DynamicResource Brush.AccentSoft}"
+                                        PointerPressed="OnMarkPressed" DoubleTapped="OnMarkDoubleTapped">
+                                    <mi:MaterialIcon Kind="MusicNoteOutline" Width="17" Height="17" Foreground="{DynamicResource Brush.Accent}" />
+                                </Border>
+                                <Button Classes="icon" Width="28" Height="28" Margin="0,0,8,0" IsVisible="{Binding IsVersion}" Command="{Binding PickCommand}" ToolTip.Tip="{loc:Str rules.useVersion}">
+                                    <Panel>
+                                        <mi:MaterialIcon Kind="RadioboxBlank" Width="18" Height="18" IsVisible="{Binding !IsPicked}" />
+                                        <mi:MaterialIcon Kind="RadioboxMarked" Width="18" Height="18" Foreground="{DynamicResource Brush.Accent}" IsVisible="{Binding IsPicked}" />
+                                    </Panel>
+                                </Button>
+                                <StackPanel Grid.Column="1" Margin="0,0,14,0" VerticalAlignment="Center">
+                                    <TextBlock Classes="rowName" Classes.top="{Binding IsSong}" Classes.playing="{Binding IsCurrent}" Text="{Binding Title}" ToolTip.Tip="{Binding Title}" />
+                                    <TextBlock Text="{Binding Line}" Classes="caption" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" IsVisible="{Binding HasLine}" />
+                                </StackPanel>
+                                <Border Grid.Column="2" Classes="pill" Background="{DynamicResource Brush.Inset}" Margin="0,0,10,0" IsVisible="{Binding HasVersions}">
+                                    <TextBlock Text="{Binding VersionsText}" FontSize="11.5" FontWeight="SemiBold" Foreground="{DynamicResource Brush.TextMuted}" />
+                                </Border>
+                                <Button Grid.Column="3" Classes="roundPlay rowPlay playable" Classes.current="{Binding IsCurrent}" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Command="{Binding PlayCommand}" ToolTip.Tip="{loc:Str player.playable}">
+                                    <Panel>
+                                        <mi:MaterialIcon Kind="Play" Width="17" Height="17" IsVisible="{Binding !IsPlayingNow}" />
+                                        <mi:MaterialIcon Kind="Pause" Width="17" Height="17" IsVisible="{Binding IsPlayingNow}" />
+                                    </Panel>
+                                </Button>
+                                <Button Grid.Column="4" Classes="roundPlay rowPlay playable" Classes.current="{Binding IsCurrent}" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Command="{Binding DownloadCommand}" ToolTip.Tip="{loc:Str library.downloadOne}">
+                                    <mi:MaterialIcon Kind="Download" Width="17" Height="17" />
+                                </Button>
+                                <TextBlock Grid.Column="5" Text="{Binding SizeText}" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                <Button Grid.Column="6" Classes="icon" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding OpenCommand}" IsVisible="{Binding HasVersions}">
+                                    <Panel>
+                                        <mi:MaterialIcon Kind="ChevronDown" Width="20" Height="20" IsVisible="{Binding !Expanded}" />
+                                        <mi:MaterialIcon Kind="ChevronUp" Width="20" Height="20" IsVisible="{Binding Expanded}" />
+                                    </Panel>
+                                </Button>
+                            </Grid>
+                        </Button>
+                    </Panel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

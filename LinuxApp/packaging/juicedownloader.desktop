@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=JuiceDownloader
+GenericName=Music Downloader
+Comment=Every Juice WRLD track, one click away
+Exec=JuiceDownloader
+Icon=juicedownloader
+Terminal=false
+Categories=AudioVideo;Network;
+Keywords=music;download;juice;wrld;lyrics;
+StartupWMClass=JuiceDownloader

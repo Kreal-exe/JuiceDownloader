@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.CatalogStateView">
+    <!-- What a page shows while there is no catalog: its DataContext is the main view model. -->
+    <Panel>
+        <Border Classes="card rise" Padding="32,30" IsVisible="{Binding IsLoading}">
+            <StackPanel Orientation="Horizontal" Spacing="16">
+                <Border Classes="tile" Width="44" Height="44" CornerRadius="14" Background="{DynamicResource Brush.AccentSoft}">
+                    <c:RingArc Width="22" Height="22" StrokeThickness="3" Stroke="{DynamicResource Brush.Accent}" IsSpinning="True" />
+                </Border>
+                <TextBlock Text="{loc:Str catalog.loading}" Classes="h2" VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+        <Border Classes="card rise" Padding="32,30" IsVisible="{Binding IsFailed}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Border Classes="tile" Width="44" Height="44" CornerRadius="14" Background="{DynamicResource Brush.DangerSoft}">
+                    <mi:MaterialIcon Kind="CloudOffOutline" Width="22" Height="22" Foreground="{DynamicResource Brush.Danger}" />
+                </Border>
+                <StackPanel Grid.Column="1" Margin="16,0" VerticalAlignment="Center">
+                    <TextBlock Text="{loc:Str catalog.failed}" Classes="h2" />
+                    <TextBlock Text="{Binding FailedText}" Classes="muted" TextWrapping="Wrap" Margin="0,4,0,0" />
+                </StackPanel>
+                <Button Grid.Column="2" Classes="primary" Content="{loc:Str catalog.retry}" Command="{Binding RefreshCatalogCommand}" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Panel>
+</UserControl>

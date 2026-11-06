@@ -1,0 +1,83 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="Color.Bg">#F3F4F9</Color>
+    <Color x:Key="Color.Accent">#6A5AF9</Color>
+    <Color x:Key="Color.Accent2">#0EA5C9</Color>
+    <Color x:Key="Color.Accent3">#EC4899</Color>
+    <Color x:Key="Color.Text">#0F172A</Color>
+
+    <SolidColorBrush x:Key="Brush.Bg" Color="#F3F4F9" />
+    <SolidColorBrush x:Key="Brush.BgTranslucent" Color="#CCF3F4F9" />
+    <SolidColorBrush x:Key="Brush.Sidebar" Color="#0F172A" Opacity="0.035" />
+    <SolidColorBrush x:Key="Brush.Card" Color="#FFFFFF" Opacity="0.86" />
+    <SolidColorBrush x:Key="Brush.CardSolid" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.CardHover" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.CardBorder" Color="#0F172A" Opacity="0.08" />
+    <SolidColorBrush x:Key="Brush.CardBorderHover" Color="#0F172A" Opacity="0.16" />
+    <SolidColorBrush x:Key="Brush.Inset" Color="#0F172A" Opacity="0.035" />
+    <SolidColorBrush x:Key="Brush.Hover" Color="#0F172A" Opacity="0.05" />
+    <SolidColorBrush x:Key="Brush.Pressed" Color="#0F172A" Opacity="0.09" />
+
+    <SolidColorBrush x:Key="Brush.Text" Color="#0F172A" />
+    <SolidColorBrush x:Key="Brush.TextMuted" Color="#5B6478" />
+    <SolidColorBrush x:Key="Brush.TextFaint" Color="#94A0B8" />
+    <SolidColorBrush x:Key="Brush.TextOnAccent" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="Brush.Accent" Color="#6A5AF9" />
+    <SolidColorBrush x:Key="Brush.Accent2" Color="#0EA5C9" />
+    <SolidColorBrush x:Key="Brush.AccentSoft" Color="#6A5AF9" Opacity="0.14" />
+    <SolidColorBrush x:Key="Brush.AccentGlow" Color="#6A5AF9" Opacity="0.45" />
+    <LinearGradientBrush x:Key="Brush.AccentGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#7C6CFF" Offset="0" />
+        <GradientStop Color="#4F7DFF" Offset="0.55" />
+        <GradientStop Color="#0EA5C9" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.RingGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#8B5CF6" Offset="0" />
+        <GradientStop Color="#6A5AF9" Offset="0.5" />
+        <GradientStop Color="#0EA5C9" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.DangerGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#F43F5E" Offset="0" />
+        <GradientStop Color="#E11D48" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.SuccessGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#059669" Offset="0" />
+        <GradientStop Color="#0E7490" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="Brush.Danger" Color="#E11D48" />
+    <SolidColorBrush x:Key="Brush.DangerSoft" Color="#E11D48" Opacity="0.12" />
+    <SolidColorBrush x:Key="Brush.Warning" Color="#D97706" />
+    <SolidColorBrush x:Key="Brush.WarningSoft" Color="#D97706" Opacity="0.12" />
+    <SolidColorBrush x:Key="Brush.Success" Color="#059669" />
+    <SolidColorBrush x:Key="Brush.SuccessSoft" Color="#059669" Opacity="0.12" />
+
+    <SolidColorBrush x:Key="Brush.Track" Color="#0F172A" Opacity="0.08" />
+    <SolidColorBrush x:Key="Brush.Input" Color="#FFFFFF" Opacity="0.9" />
+    <SolidColorBrush x:Key="Brush.InputBorder" Color="#0F172A" Opacity="0.12" />
+    <SolidColorBrush x:Key="Brush.Overlay" Color="#E8EAF2" Opacity="0.72" />
+    <SolidColorBrush x:Key="Brush.Popup" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.Knob" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.Scroll" Color="#0F172A" Opacity="0.18" />
+    <SolidColorBrush x:Key="Brush.ScrollHover" Color="#0F172A" Opacity="0.32" />
+    <SolidColorBrush x:Key="Brush.Divider" Color="#0F172A" Opacity="0.07" />
+
+    <RadialGradientBrush x:Key="Brush.Blob1" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+        <GradientStop Color="#3D7C6CFF" Offset="0" />
+        <GradientStop Color="#007C6CFF" Offset="1" />
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="Brush.Blob2" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+        <GradientStop Color="#2E22D3EE" Offset="0" />
+        <GradientStop Color="#0022D3EE" Offset="1" />
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="Brush.Blob3" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+        <GradientStop Color="#26F472B6" Offset="0" />
+        <GradientStop Color="#00F472B6" Offset="1" />
+    </RadialGradientBrush>
+
+    <Color x:Key="Color.Shadow">#1E2A4A</Color>
+    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="Shadow.Opacity">0.18</sys:Double>
+
+</ResourceDictionary>

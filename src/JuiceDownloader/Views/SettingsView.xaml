@@ -1,0 +1,86 @@
+<UserControl x:Class="JuiceDownloader.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32,6,32,28" MaxWidth="960" HorizontalAlignment="Left">
+            <TextBlock Text="{loc:Str settings.title}" Style="{StaticResource H1}" c:Entrance.Delay="0" />
+
+            <!-- downloads -->
+            <Border Style="{StaticResource Card}" Margin="0,20,0,0" Padding="24,18,24,10" c:Entrance.Delay="60">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str settings.downloads}" Style="{StaticResource H2}" Margin="0,0,0,4" />
+
+                    <c:SettingRow Glyph="&#xE8B7;" Title="{loc:Str settings.folder}" Description="{loc:Str settings.folder.desc}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Settings.Destination}" Style="{StaticResource Muted}" FontSize="12.5" MaxWidth="280" VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis" ToolTip="{Binding Settings.Destination}" Margin="0,0,12,0" />
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:Str overview.change}" Command="{Binding Settings.ChangeFolderCommand}" />
+                        </StackPanel>
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE896;" Title="{loc:Str settings.parallel}" Description="{loc:Str settings.parallel.desc}">
+                        <ComboBox Style="{StaticResource Combo}" ItemsSource="{Binding Settings.ParallelChoices}" SelectedItem="{Binding Settings.Parallel}" />
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE7BA;" Title="{loc:Str settings.confirm}" Description="{loc:Str settings.confirm.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Settings.ConfirmDownloads}" />
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE72C;" Title="{loc:Str settings.refreshOnLaunch}" Description="{loc:Str settings.refreshOnLaunch.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Settings.RefreshOnLaunch}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <!-- general -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="24,18,24,10" c:Entrance.Delay="120">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str settings.general}" Style="{StaticResource H2}" Margin="0,0,0,4" />
+
+                    <c:SettingRow Glyph="&#xE774;" Title="{loc:Str settings.language}" Description="{loc:Str settings.language.desc}">
+                        <ComboBox Style="{StaticResource Combo}" ItemsSource="{Binding Settings.Languages}" SelectedItem="{Binding Settings.SelectedLanguage}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:LanguageOption}">
+                                    <TextBlock Text="{Binding Label}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE790;" Title="{loc:Str settings.theme}" Description="{loc:Str settings.theme.desc}">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Style="{StaticResource Chip}" Content="{loc:Str settings.theme.dark}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="dark"
+                                         IsChecked="{Binding Settings.Theme, Converter={StaticResource Equals}, ConverterParameter=dark, Mode=OneWay}" />
+                            <RadioButton Style="{StaticResource Chip}" Content="{loc:Str settings.theme.light}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="light"
+                                         IsChecked="{Binding Settings.Theme, Converter={StaticResource Equals}, ConverterParameter=light, Mode=OneWay}" />
+                            <RadioButton Style="{StaticResource Chip}" Content="{loc:Str settings.theme.system}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="system" Margin="0"
+                                         IsChecked="{Binding Settings.Theme, Converter={StaticResource Equals}, ConverterParameter=system, Mode=OneWay}" />
+                        </StackPanel>
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE945;" Title="{loc:Str settings.animations}" Description="{loc:Str settings.animations.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Settings.Animations}" />
+                    </c:SettingRow>
+
+                    <c:SettingRow Glyph="&#xE91B;" Title="{loc:Str settings.backdrop}" Description="{loc:Str settings.backdrop.desc}">
+                        <CheckBox Style="{StaticResource Toggle}" IsChecked="{Binding Settings.Backdrop}" IsEnabled="{Binding Settings.BackdropSupported}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <!-- reset -->
+            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="24,10" c:Entrance.Delay="180">
+                <c:SettingRow Glyph="&#xE777;" Title="{loc:Str settings.reset}" Description="{loc:Str settings.reset.desc}" BorderThickness="0">
+                    <Button Style="{StaticResource GhostButton}" Content="{loc:Str settings.reset.button}" Command="{Binding Settings.ResetCommand}" />
+                </c:SettingRow>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

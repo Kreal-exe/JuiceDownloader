@@ -1,0 +1,71 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="JuiceDownloader.Views.SettingsView">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32,6,32,28" MaxWidth="960" HorizontalAlignment="Left">
+            <TextBlock Text="{loc:Str settings.title}" Classes="h1" />
+
+            <!-- downloads -->
+            <Border Classes="card rise" Margin="0,20,0,0" Padding="24,18,24,10">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str settings.downloads}" Classes="h2" Margin="0,0,0,4" />
+                    <c:SettingRow Glyph="FolderDownloadOutline" Title="{loc:Str settings.folder}" Description="{loc:Str settings.folder.desc}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="{Binding Settings.Destination}" Classes="caption" VerticalAlignment="Center" MaxWidth="260"
+                                       TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Settings.Destination}" />
+                            <Button Classes="ghost" Content="{loc:Str overview.change}" Command="{Binding ChangeFolderCommand}" />
+                        </StackPanel>
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="DownloadMultiple" Title="{loc:Str settings.parallel}" Description="{loc:Str settings.parallel.desc}">
+                        <ComboBox Classes="combo" MinWidth="90" ItemsSource="{Binding Settings.ParallelChoices}" SelectedItem="{Binding Settings.Parallel}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="AlertCircleOutline" Title="{loc:Str settings.confirm}" Description="{loc:Str settings.confirm.desc}">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Settings.ConfirmDownloads}" />
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="Refresh" Title="{loc:Str settings.refreshOnLaunch}" Description="{loc:Str settings.refreshOnLaunch.desc}" BorderThickness="0">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Settings.RefreshOnLaunch}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <!-- general -->
+            <Border Classes="card rise" Margin="0,16,0,0" Padding="24,18,24,10">
+                <StackPanel>
+                    <TextBlock Text="{loc:Str settings.general}" Classes="h2" Margin="0,0,0,4" />
+                    <c:SettingRow Glyph="ThemeLightDark" Title="{loc:Str settings.theme}" Description="{loc:Str settings.theme.desc}">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Classes="chip" Classes.active="{Binding Settings.Theme, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=dark}"
+                                    Content="{loc:Str settings.theme.dark}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="dark" />
+                            <Button Classes="chip" Classes.active="{Binding Settings.Theme, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=light}"
+                                    Content="{loc:Str settings.theme.light}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="light" />
+                            <Button Classes="chip" Classes.active="{Binding Settings.Theme, Converter={x:Static c:EqualsConverter.Instance}, ConverterParameter=system}"
+                                    Content="{loc:Str settings.theme.system}" Command="{Binding Settings.SetThemeCommand}" CommandParameter="system" Margin="0" />
+                        </StackPanel>
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="Earth" Title="{loc:Str settings.language}" Description="{loc:Str settings.language.desc}">
+                        <ComboBox Classes="combo" ItemsSource="{Binding Settings.Languages}" SelectedItem="{Binding Settings.SelectedLanguage}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Label}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </c:SettingRow>
+                    <c:SettingRow Glyph="AnimationPlayOutline" Title="{loc:Str settings.animations}" Description="{loc:Str settings.animations.desc}" BorderThickness="0">
+                        <CheckBox Classes="toggle" IsChecked="{Binding Settings.Animations}" />
+                    </c:SettingRow>
+                </StackPanel>
+            </Border>
+
+            <!-- reset -->
+            <Border Classes="card rise" Margin="0,16,0,0" Padding="24,4">
+                <c:SettingRow Glyph="Restore" Title="{loc:Str settings.reset}" Description="{loc:Str settings.reset.desc}" BorderThickness="0">
+                    <Button Classes="ghost" Content="{loc:Str settings.reset.button}" Command="{Binding Settings.ResetCommand}" />
+                </c:SettingRow>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

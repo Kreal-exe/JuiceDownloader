@@ -1,0 +1,87 @@
+<UserControl x:Class="JuiceDownloader.Views.PreviewSheet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:JuiceDownloader.Controls"
+             xmlns:loc="clr-namespace:JuiceDownloader.Localization"
+             xmlns:vm="clr-namespace:JuiceDownloader.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:PreviewViewModel}"
+             Visibility="{Binding IsVisible, Converter={StaticResource BoolToVis}}">
+
+    <Grid Background="{DynamicResource Brush.Overlay}">
+        <Border Margin="20,8,20,20" Padding="22,16" CornerRadius="20" Background="{DynamicResource Brush.CardSolid}"
+                BorderBrush="{DynamicResource Brush.CardBorder}" BorderThickness="1" c:Entrance.Replay="{Binding IsVisible}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" ShadowDepth="10" Opacity="0.45" Color="Black" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                        <TextBlock Text="{Binding Title}" Style="{StaticResource H2}" FontSize="17" TextTrimming="CharacterEllipsis" ToolTip="{Binding Title}" />
+                        <TextBlock Text="{Binding Place}" Style="{StaticResource Caption}" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" ToolTip="{Binding Place}" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="1" Text="{Binding CountText}" Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <Button Grid.Column="2" Style="{StaticResource IconButton}" Content="&#xE76B;" Command="{Binding PreviousCommand}" IsEnabled="{Binding HasPrevious}" ToolTip="{loc:Str preview.previous}" />
+                    <Button Grid.Column="3" Style="{StaticResource IconButton}" Content="&#xE76C;" Command="{Binding NextCommand}" IsEnabled="{Binding HasNext}" ToolTip="{loc:Str preview.next}" />
+                    <Button Grid.Column="4" Style="{StaticResource IconButton}" Content="&#xE711;" Command="{Binding CloseCommand}" Margin="8,0,0,0" ToolTip="{loc:Str preview.close}" />
+                </Grid>
+
+                <Grid x:Name="Room" Grid.Row="1" Margin="0,14" SizeChanged="OnRoomSizeChanged">
+                    <Image Source="{Binding Image}" Stretch="Uniform" StretchDirection="DownOnly" RenderOptions.BitmapScalingMode="HighQuality" />
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                  Visibility="{Binding HasText, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding Text}" FontFamily="{StaticResource Font.Mono}" FontSize="13" TextWrapping="Wrap" />
+                    </ScrollViewer>
+
+                    <Grid Visibility="{Binding IsVideo, Converter={StaticResource BoolToVis}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <MediaElement x:Name="Video" LoadedBehavior="Manual" UnloadedBehavior="Close" Stretch="Uniform"
+                                      MediaOpened="OnVideoOpened" MediaEnded="OnVideoEnded" MediaFailed="OnVideoFailed" />
+                        <Grid Grid.Row="1" Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="VideoToggle" Style="{StaticResource PlayButton}" Width="34" Height="34" Content="&#xE769;" Click="OnVideoToggle" />
+                            <TextBlock x:Name="VideoElapsed" Grid.Column="1" Text="0:00" Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="12,0,10,0" />
+                            <Slider x:Name="VideoSeek" Grid.Column="2" Style="{StaticResource PlayerSlider}" Minimum="0" Maximum="1" ValueChanged="OnVideoSeek" />
+                            <TextBlock x:Name="VideoTotal" Grid.Column="3" Text="0:00" Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        </Grid>
+                    </Grid>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}">
+                        <c:Arc StrokeThickness="3" Stroke="{DynamicResource Brush.Accent}" StartAngle="0" EndAngle="270" Width="28" Height="28"
+                               StrokeStartLineCap="Round" StrokeEndLineCap="Round" c:Spin.IsActive="{Binding IsLoading}" />
+                        <TextBlock Text="{Binding LoadingText}" Style="{StaticResource Muted}" FontSize="13" Margin="0,12,0,0" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding ErrorText}" Style="{StaticResource Muted}" Foreground="{DynamicResource Brush.Danger}" TextWrapping="Wrap" TextAlignment="Center"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="520"
+                               Visibility="{Binding ErrorText, Converter={StaticResource NullToVis}}" />
+                </Grid>
+
+                <CheckBox Grid.Row="2" Style="{StaticResource Check}" Content="{loc:Str preview.select}" IsChecked="{Binding IsSelected}" HorizontalAlignment="Left" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
